@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id              String   @id @default(uuid()) // UUID primary key
+  companyName     String
+  website         String?
+  logoUrl         String?
+  brandColors     Json?
+  modulesEnabled  String[]
+  contactName     String?
+  contactNumber   String?
+  address         String?
+  password        String   @default("blog@123") // Default password
+  passwordChanged Boolean  @default(false) // Tracks if password was changed
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  blogs  Blog[]
+  news   News[]
+  images Image[]
+  videos Video[]
+}
+
+model Blog {
+  id          String   @id @default(uuid())
+  clientId    String
+  slug        String   @unique
+  title       String
+  keywords    String
+  description String
+  createdAt   DateTime @default(now())
+
+  sections BlogSection[]
+  client   Client        @relation(fields: [clientId], references: [id])
+}
+
+model BlogSection {
+  id       String  @id @default(uuid())
+  blogId   String
+  order    Int
+  type     String // "text" or "image"
+  text     String?
+  imageUrl String?
+  imageAlt String?
+
+  blog Blog @relation(fields: [blogId], references: [id])
+}
+
+model News {
+  id        String   @id @default(uuid()) // UUID
+  clientId  String
+  title     String
+  createdAt DateTime @default(now())
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model Image {
+  id        String   @id @default(uuid()) // UUID
+  clientId  String
+  title     String
+  createdAt DateTime @default(now())
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model Video {
+  id        String   @id @default(uuid()) // UUID
+  clientId  String
+  title     String
+  createdAt DateTime @default(now())
+  client    Client   @relation(fields: [clientId], references: [id])
+}
