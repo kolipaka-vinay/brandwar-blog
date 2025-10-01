@@ -366,13 +366,13 @@ export default function Clients() {
       if (formData.logoFile) {
         const uploadData = new FormData();
         uploadData.append("file", formData.logoFile);
-        const uploadRes = await api.post("/upload", uploadData, {
+        const uploadRes = await api.post("/all-clients/upload", uploadData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         logoUrl = uploadRes.data.url;
       }
 
-      const res = await api.post("/clients", { ...formData, logoUrl });
+      const res = await api.post("/all-clients", { ...formData, logoUrl });
       setClients([...clients, res.data]);
       resetForm();
       setShowForm(false);
@@ -393,13 +393,13 @@ export default function Clients() {
       if (formData.logoFile) {
         const uploadData = new FormData();
         uploadData.append("file", formData.logoFile);
-        const uploadRes = await api.post("/upload", uploadData, {
+        const uploadRes = await api.post("/all-clients/upload", uploadData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         logoUrl = uploadRes.data.url;
       }
 
-      const res = await api.put(`/clients/${selectedClient.id}`, {
+      const res = await api.put(`/all-clients/${selectedClient.id}`, {
         ...formData,
         logoUrl,
       });
