@@ -146,7 +146,7 @@ const ClientForm = ({
                   ...formData,
                   modulesEnabled: checked
                     ? [...formData.modulesEnabled, module]
-                    : formData.modulesEnabled.filter((m) => m !== module),
+                    : formData.modulesEnabled.filter((m: any) => m !== module),
                 });
               }}
               className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
@@ -185,7 +185,7 @@ const ClientForm = ({
           </label>
           <input
             type="text"
-            placeholder="+1 (555) 123-4567"
+            placeholder="+91 123 456 7890"
             className="w-full border border-slate-200 px-4 py-3 rounded-xl focus:ring-2 focus:ring-gray-300 focus:border-transparent outline-none transition-all"
             value={formData.contactNumber}
             onChange={(e) =>
@@ -360,18 +360,57 @@ export default function Clients() {
   };
 
   // Add Client
+  // const handleAddClient = async () => {
+  //   try {
+  //     let logoUrl = "";
+  //     if (formData.logoFile) {
+  //       const uploadData = new FormData();
+  //       uploadData.append("file", formData.logoFile);
+  //       const uploadRes = await api.post("/all-clients/upload", uploadData, {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       });
+  //       logoUrl = uploadRes.data.url;
+  //     }
+
+  //     const res = await api.post("/all-clients", { ...formData, logoUrl });
+  //     setClients([...clients, res.data]);
+  //     resetForm();
+  //     setShowForm(false);
+  //     toast.success("Client added successfully!");
+  //   } catch (err: any) {
+  //     console.error(err);
+  //     toast.error(
+  //       "Failed to add client: " + (err.response?.data?.error || err.message)
+  //     );
+  //   }
+  // };
+
   const handleAddClient = async () => {
     try {
       let logoUrl = "";
+
       if (formData.logoFile) {
-        const uploadData = new FormData();
-        uploadData.append("file", formData.logoFile);
-        const uploadRes = await api.post("/all-clients/upload", uploadData, {
-          headers: { "Content-Type": "multipart/form-data" },
+        // 1. Request signed URL from backend
+        const signedUrlRes = await api.post("/all-clients/upload-s3", {
+          fileName: formData.logoFile.name,
+          contentType: formData.logoFile.type,
+          category: "client-logo",
         });
-        logoUrl = uploadRes.data.url;
+
+        const { uploadUrl, fileKey } = signedUrlRes.data;
+
+        // 2. Upload file directly to S3
+        await fetch(uploadUrl, {
+          method: "PUT",
+          headers: { "Content-Type": formData.logoFile.type },
+          body: formData.logoFile,
+        });
+
+        // 3. Save the fileKey in DB
+        logoUrl = fileKey;
       }
 
+      // 4. Add client with logoUrl
       const res = await api.post("/all-clients", { ...formData, logoUrl });
       setClients([...clients, res.data]);
       resetForm();
@@ -386,23 +425,66 @@ export default function Clients() {
   };
 
   // Edit Client
+  // const handleUpdateClient = async () => {
+  //   if (!selectedClient) return;
+  //   try {
+  //     let logoUrl = formData.logoPreview || "";
+  //     if (formData.logoFile) {
+  //       const uploadData = new FormData();
+  //       uploadData.append("file", formData.logoFile);
+  //       const uploadRes = await api.post("/all-clients/upload", uploadData, {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       });
+  //       logoUrl = uploadRes.data.url;
+  //     }
+
+  //     const res = await api.put(`/all-clients/${selectedClient.id}`, {
+  //       ...formData,
+  //       logoUrl,
+  //     });
+  //     setClients(
+  //       clients.map((c) => (c.id === selectedClient.id ? res.data : c))
+  //     );
+  //     resetForm();
+  //     setShowEditModal(false);
+  //     toast.success("Client updated successfully!");
+  //   } catch (err: any) {
+  //     console.error(err);
+  //     toast.error(
+  //       "Failed to update client: " + (err.response?.data?.error || err.message)
+  //     );
+  //   }
+  // };
+
   const handleUpdateClient = async () => {
     if (!selectedClient) return;
+
     try {
       let logoUrl = formData.logoPreview || "";
+
       if (formData.logoFile) {
-        const uploadData = new FormData();
-        uploadData.append("file", formData.logoFile);
-        const uploadRes = await api.post("/all-clients/upload", uploadData, {
-          headers: { "Content-Type": "multipart/form-data" },
+        const signedUrlRes = await api.post("/all-clients/upload-s3", {
+          fileName: formData.logoFile.name,
+          contentType: formData.logoFile.type,
+          category: "client-logo",
         });
-        logoUrl = uploadRes.data.url;
+
+        const { uploadUrl, fileKey } = signedUrlRes.data;
+
+        await fetch(uploadUrl, {
+          method: "PUT",
+          headers: { "Content-Type": formData.logoFile.type },
+          body: formData.logoFile,
+        });
+
+        logoUrl = fileKey;
       }
 
       const res = await api.put(`/all-clients/${selectedClient.id}`, {
         ...formData,
         logoUrl,
       });
+
       setClients(
         clients.map((c) => (c.id === selectedClient.id ? res.data : c))
       );
