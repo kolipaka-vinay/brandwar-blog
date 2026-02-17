@@ -141,3 +141,6 @@ docker-compose.override.yml
 .idea/
 *.iml
 .vagrant/
+
+# frontend
+client/

@@ -1,26 +1,47 @@
 import express from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
-import { PrismaClient } from "./generated/prisma/index.js";
-import { router as clientAuthRoutes } from "./routes/clientAuthRoutes.js";
-import { router as superAdminRoutes } from "./routes/superAdminRoutes.js";
-import { uploadsPath } from "./controllers/superAdminController.js";
-import clientBlogRoutes from "./routes/clientBlogRoutes.js";
 import path from "path";
 
-const prisma = new PrismaClient();
+import authRoutes from "./routes/authRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";   // rename from clientBlogRoutes if needed
+
 const app = express();
 const PORT = 4000;
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use("/api/all-clients", superAdminRoutes);
+//////////////////////////////////////////////////////
+// MIDDLEWARE
+//////////////////////////////////////////////////////
 
-app.use("/api/client", clientAuthRoutes);
-app.use("/api/blogs", clientBlogRoutes);
-// serve uploaded files
+app.use(cors());
+app.use(express.json());   // instead of bodyParser
+
+//////////////////////////////////////////////////////
+// ROUTES
+//////////////////////////////////////////////////////
+
+app.use("/api/auth", authRoutes);
+app.use("/api/admins", adminRoutes);
+app.use("/api/blogs", blogRoutes);
+
+//////////////////////////////////////////////////////
+// STATIC FILES (Uploads)
+//////////////////////////////////////////////////////
+
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
+//////////////////////////////////////////////////////
+// TEST ROUTE
+//////////////////////////////////////////////////////
+
+app.get("/test", (req, res) => {
+  res.send("Server working");
+});
+
+//////////////////////////////////////////////////////
+// START SERVER
+//////////////////////////////////////////////////////
+
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT} http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
