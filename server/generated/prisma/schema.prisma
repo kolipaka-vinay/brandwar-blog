@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ENUM
+
+enum Role {
+  ADMIN
+  SUPERADMIN
+}
+
+//USER
+
+model User {
+  id String @id @default(uuid())
+
+  // Company Details
+  company_name    String
+  website         String
+  email           String @unique
+  logo            String // Store image URL or path
+  primary_color   String // Hex code (e.g., #000000)
+  secondary_color String // Hex code
+
+  // Contact Details
+  name           String
+  contact_number String @unique
+  address        String
+
+  // Authentication
+  password String
+
+  // Access Controls
+  role        Role    @default(ADMIN)
+  allowBlogs  Boolean @default(false) // If false → cannot add new content
+  allowNews   Boolean @default(false) // If false → cannot add new content
+  allowImages Boolean @default(false) // If false → cannot add new content
+
+  // Subscription / Access Duration
+  startDate DateTime @default(now())
+  endDate   DateTime
+
+  // Status
+  isActive Boolean @default(true)
+
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  // Relations
+  blogs        Blog[]
+  news         News[]
+  imageFolders ImageFolder[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+//BLOG
+model Blog {
+  id          String   @id @default(uuid())
+  userId      String
+  title       String
+  slug        String   @unique
+  description String?
+  keywords    Json?
+  createdAt   DateTime @default(now())
+
+  user     User               @relation(fields: [userId], references: [id])
+  contents BlogContentBlock[]
+}
+
+//CONTENT FOR BLOG
+model BlogContentBlock {
+  id        String   @id @default(uuid())
+  type      String // "text" | "image"
+  content   String
+  order     Int
+  createdAt DateTime @default(now())
+
+  blogId String
+  blog   Blog   @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@index([blogId, order])
+}
+
+//NEWS
+
+model News {
+  id          String   @id @default(uuid())
+  userId      String
+  title       String
+  slug        String   @unique
+  description String?
+  keywords    Json?
+  createdAt   DateTime @default(now())
+
+  user     User               @relation(fields: [userId], references: [id])
+  contents NewsContentBlock[]
+}
+
+//CONTENT FOR  NEWS 
+
+model NewsContentBlock {
+  id        String   @id @default(uuid())
+  type      String // "text" | "image"
+  content   String
+  order     Int
+  createdAt DateTime @default(now())
+
+  newsId String
+  news   News   @relation(fields: [newsId], references: [id], onDelete: Cascade)
+
+  @@index([newsId, order])
+}
+
+//IMAGE FOLDER
+
+model ImageFolder {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  createdAt DateTime @default(now())
+
+  user   User    @relation(fields: [userId], references: [id])
+  images Image[]
+
+  @@index([userId])
+}
+
+//IMAGES
+
+model Image {
+  id        String   @id @default(uuid())
+  folderId  String
+  url       String
+  size      Int // store in bytes
+  createdAt DateTime @default(now())
+
+  folder ImageFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+
+  @@index([folderId])
+}

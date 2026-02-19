@@ -9,6 +9,7 @@ datasource db {
 }
 
 
+
 // ENUM
 
 enum Role {
@@ -52,6 +53,9 @@ model User {
   // Status
   isActive        Boolean  @default(true)   
 
+  isDeleted Boolean  @default(false)
+  deletedAt DateTime?
+
   // Relations
   blogs           Blog[]
   news            News[]
@@ -75,7 +79,21 @@ model Blog {
   createdAt   DateTime       @default(now())
 
   user        User           @relation(fields: [userId], references: [id])
-  contents    ContentBlock[]
+  contents    BlogContentBlock[]
+}
+
+//CONTENT FOR BLOG
+model BlogContentBlock {
+  id        String   @id @default(uuid())
+  type      String   // "text" | "image"
+  content   String
+  order     Int
+  createdAt DateTime @default(now())
+
+  blogId    String
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@index([blogId, order])
 }
 
 
@@ -92,26 +110,22 @@ model News {
   createdAt   DateTime       @default(now())
 
   user        User           @relation(fields: [userId], references: [id])
-  contents    ContentBlock[]
+  contents    NewsContentBlock[]
 }
 
 
-//CONTENT FOR BLOGS & NEWS 
+//CONTENT FOR  NEWS 
 
-model ContentBlock {
+model NewsContentBlock {
   id        String   @id @default(uuid())
   type      String   // "text" | "image"
   content   String
   order     Int
   createdAt DateTime @default(now())
 
-  blogId    String?
-  blog      Blog?    @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  newsId    String
+  news      News    @relation(fields: [newsId], references: [id], onDelete: Cascade)
 
-  newsId    String?
-  news      News?    @relation(fields: [newsId], references: [id], onDelete: Cascade)
-
-  @@index([blogId, order])
   @@index([newsId, order])
 }
 
