@@ -18,7 +18,7 @@ import { upload } from "../middleware/uploadMiddleware.js";
 // Routes
 router.post("/",requireAuth, upload.any(), createBlog);
 router.put("/:id",requireAuth, upload.any(), updateBlog);
-router.get("/", getBlogs);
+router.get("/",requireAuth, getBlogs);
 // router.get("/:slug", getBlogBySlug);
 router.delete("/:id",requireAuth, deleteBlog);
 

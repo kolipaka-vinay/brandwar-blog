@@ -41,6 +41,7 @@ model User {
   allowBlogs  Boolean @default(false) // If false → cannot add new content
   allowNews   Boolean @default(false) // If false → cannot add new content
   allowImages Boolean @default(false) // If false → cannot add new content
+  allowVideos Boolean @default(false) // If false → cannot add new content
 
   // Subscription / Access Duration
   startDate DateTime @default(now())
@@ -56,6 +57,7 @@ model User {
   blogs        Blog[]
   news         News[]
   imageFolders ImageFolder[]
+  VideoFolders VideoFolder[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -104,8 +106,32 @@ model News {
   contents NewsContentBlock[]
 }
 
-//CONTENT FOR  NEWS 
+// VIDEO FOLDER
+model VideoFolder {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
 
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  videos Video[]
+}
+
+// VIDEO CONTENT
+model Video {
+  id        String   @id @default(uuid())
+  title     String
+  language  String?
+  location  String?
+  url       String // stored video path
+  createdAt DateTime @default(now())
+
+  folderId String
+  folder   VideoFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+}
+
+//CONTENT FOR  NEWS 
 model NewsContentBlock {
   id        String   @id @default(uuid())
   type      String // "text" | "image"

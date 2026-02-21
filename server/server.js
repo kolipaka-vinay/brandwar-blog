@@ -4,9 +4,11 @@ import path from "path";
 
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
-import blogRoutes from "./routes/blogRoutes.js";   // rename from clientBlogRoutes if needed
+import blogRoutes from "./routes/blogRoutes.js";
+import newsRoutes from "./routes/newsRoutes.js";
+import imageRoutes from "./routes/imageRoutes.js"
 import { PrismaClient } from "./generated/prisma/index.js";
-
+import videoRoutes from "./routes/videoRoutes.js"
 const app = express();
 const PORT = 4000;
 
@@ -18,6 +20,9 @@ app.use(express.json());   // instead of bodyParser
 app.use("/api/auth", authRoutes);
 app.use("/api/admins", adminRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/news",newsRoutes)
+app.use("/api/imagefolders",imageRoutes)
+app.use("/api/videofolders",videoRoutes)
 
 // STATIC FILES (Uploads)
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));

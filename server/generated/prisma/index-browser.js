@@ -137,6 +137,7 @@ exports.Prisma.UserScalarFieldEnum = {
   allowBlogs: 'allowBlogs',
   allowNews: 'allowNews',
   allowImages: 'allowImages',
+  allowVideos: 'allowVideos',
   startDate: 'startDate',
   endDate: 'endDate',
   isActive: 'isActive',
@@ -173,6 +174,23 @@ exports.Prisma.NewsScalarFieldEnum = {
   description: 'description',
   keywords: 'keywords',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.VideoFolderScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  createdAt: 'createdAt',
+  userId: 'userId'
+};
+
+exports.Prisma.VideoScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  language: 'language',
+  location: 'location',
+  url: 'url',
+  createdAt: 'createdAt',
+  folderId: 'folderId'
 };
 
 exports.Prisma.NewsContentBlockScalarFieldEnum = {
@@ -234,6 +252,8 @@ exports.Prisma.ModelName = {
   Blog: 'Blog',
   BlogContentBlock: 'BlogContentBlock',
   News: 'News',
+  VideoFolder: 'VideoFolder',
+  Video: 'Video',
   NewsContentBlock: 'NewsContentBlock',
   ImageFolder: 'ImageFolder',
   Image: 'Image'

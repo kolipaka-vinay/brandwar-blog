@@ -215,6 +215,49 @@ export const getAdmins = async (req, res) => {
 //   }
 // };
 
+
+// GET SINGLE ADMIN
+export const getAdminById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const admin = await prisma.user.findFirst({
+      where: {
+        id,
+        role: "ADMIN", // ensures only admin can be fetched
+      },
+      select: {
+        id: true,
+        company_name: true,
+        name: true,
+        email: true,
+        contact_number: true,
+        website: true,
+        primary_color: true,
+        secondary_color: true,
+        allowBlogs: true,
+        allowNews: true,
+        allowImages: true,
+        startDate: true,
+        endDate: true,
+        isActive: true,
+        createdAt: true,
+      },
+    });
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.json(admin);
+
+  } catch (err) {
+    console.error("GET ADMIN BY ID ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
 // SOFT DELETE ADMIN
 export const deleteAdmin = async (req, res) => {
   try {

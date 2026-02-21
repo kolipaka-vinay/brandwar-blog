@@ -34,6 +34,16 @@ export type BlogContentBlock = $Result.DefaultSelection<Prisma.$BlogContentBlock
  */
 export type News = $Result.DefaultSelection<Prisma.$NewsPayload>
 /**
+ * Model VideoFolder
+ * 
+ */
+export type VideoFolder = $Result.DefaultSelection<Prisma.$VideoFolderPayload>
+/**
+ * Model Video
+ * 
+ */
+export type Video = $Result.DefaultSelection<Prisma.$VideoPayload>
+/**
  * Model NewsContentBlock
  * 
  */
@@ -223,6 +233,26 @@ export class PrismaClient<
     * ```
     */
   get news(): Prisma.NewsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.videoFolder`: Exposes CRUD operations for the **VideoFolder** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VideoFolders
+    * const videoFolders = await prisma.videoFolder.findMany()
+    * ```
+    */
+  get videoFolder(): Prisma.VideoFolderDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.video`: Exposes CRUD operations for the **Video** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Videos
+    * const videos = await prisma.video.findMany()
+    * ```
+    */
+  get video(): Prisma.VideoDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.newsContentBlock`: Exposes CRUD operations for the **NewsContentBlock** model.
@@ -698,6 +728,8 @@ export namespace Prisma {
     Blog: 'Blog',
     BlogContentBlock: 'BlogContentBlock',
     News: 'News',
+    VideoFolder: 'VideoFolder',
+    Video: 'Video',
     NewsContentBlock: 'NewsContentBlock',
     ImageFolder: 'ImageFolder',
     Image: 'Image'
@@ -719,7 +751,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "blog" | "blogContentBlock" | "news" | "newsContentBlock" | "imageFolder" | "image"
+      modelProps: "user" | "blog" | "blogContentBlock" | "news" | "videoFolder" | "video" | "newsContentBlock" | "imageFolder" | "image"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1016,6 +1048,154 @@ export namespace Prisma {
           count: {
             args: Prisma.NewsCountArgs<ExtArgs>
             result: $Utils.Optional<NewsCountAggregateOutputType> | number
+          }
+        }
+      }
+      VideoFolder: {
+        payload: Prisma.$VideoFolderPayload<ExtArgs>
+        fields: Prisma.VideoFolderFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VideoFolderFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VideoFolderFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>
+          }
+          findFirst: {
+            args: Prisma.VideoFolderFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VideoFolderFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>
+          }
+          findMany: {
+            args: Prisma.VideoFolderFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>[]
+          }
+          create: {
+            args: Prisma.VideoFolderCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>
+          }
+          createMany: {
+            args: Prisma.VideoFolderCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VideoFolderCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>[]
+          }
+          delete: {
+            args: Prisma.VideoFolderDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>
+          }
+          update: {
+            args: Prisma.VideoFolderUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>
+          }
+          deleteMany: {
+            args: Prisma.VideoFolderDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VideoFolderUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VideoFolderUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>[]
+          }
+          upsert: {
+            args: Prisma.VideoFolderUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoFolderPayload>
+          }
+          aggregate: {
+            args: Prisma.VideoFolderAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideoFolder>
+          }
+          groupBy: {
+            args: Prisma.VideoFolderGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VideoFolderGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VideoFolderCountArgs<ExtArgs>
+            result: $Utils.Optional<VideoFolderCountAggregateOutputType> | number
+          }
+        }
+      }
+      Video: {
+        payload: Prisma.$VideoPayload<ExtArgs>
+        fields: Prisma.VideoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VideoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VideoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>
+          }
+          findFirst: {
+            args: Prisma.VideoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VideoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>
+          }
+          findMany: {
+            args: Prisma.VideoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>[]
+          }
+          create: {
+            args: Prisma.VideoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>
+          }
+          createMany: {
+            args: Prisma.VideoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VideoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>[]
+          }
+          delete: {
+            args: Prisma.VideoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>
+          }
+          update: {
+            args: Prisma.VideoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>
+          }
+          deleteMany: {
+            args: Prisma.VideoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VideoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VideoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>[]
+          }
+          upsert: {
+            args: Prisma.VideoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoPayload>
+          }
+          aggregate: {
+            args: Prisma.VideoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideo>
+          }
+          groupBy: {
+            args: Prisma.VideoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VideoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VideoCountArgs<ExtArgs>
+            result: $Utils.Optional<VideoCountAggregateOutputType> | number
           }
         }
       }
@@ -1341,6 +1521,8 @@ export namespace Prisma {
     blog?: BlogOmit
     blogContentBlock?: BlogContentBlockOmit
     news?: NewsOmit
+    videoFolder?: VideoFolderOmit
+    video?: VideoOmit
     newsContentBlock?: NewsContentBlockOmit
     imageFolder?: ImageFolderOmit
     image?: ImageOmit
@@ -1427,12 +1609,14 @@ export namespace Prisma {
     blogs: number
     news: number
     imageFolders: number
+    VideoFolders: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     blogs?: boolean | UserCountOutputTypeCountBlogsArgs
     news?: boolean | UserCountOutputTypeCountNewsArgs
     imageFolders?: boolean | UserCountOutputTypeCountImageFoldersArgs
+    VideoFolders?: boolean | UserCountOutputTypeCountVideoFoldersArgs
   }
 
   // Custom InputTypes
@@ -1465,6 +1649,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountImageFoldersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ImageFolderWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVideoFoldersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoFolderWhereInput
   }
 
 
@@ -1531,6 +1722,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type VideoFolderCountOutputType
+   */
+
+  export type VideoFolderCountOutputType = {
+    videos: number
+  }
+
+  export type VideoFolderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    videos?: boolean | VideoFolderCountOutputTypeCountVideosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VideoFolderCountOutputType without action
+   */
+  export type VideoFolderCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolderCountOutputType
+     */
+    select?: VideoFolderCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VideoFolderCountOutputType without action
+   */
+  export type VideoFolderCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoWhereInput
+  }
+
+
+  /**
    * Count Type ImageFolderCountOutputType
    */
 
@@ -1591,6 +1813,7 @@ export namespace Prisma {
     allowBlogs: boolean | null
     allowNews: boolean | null
     allowImages: boolean | null
+    allowVideos: boolean | null
     startDate: Date | null
     endDate: Date | null
     isActive: boolean | null
@@ -1616,6 +1839,7 @@ export namespace Prisma {
     allowBlogs: boolean | null
     allowNews: boolean | null
     allowImages: boolean | null
+    allowVideos: boolean | null
     startDate: Date | null
     endDate: Date | null
     isActive: boolean | null
@@ -1641,6 +1865,7 @@ export namespace Prisma {
     allowBlogs: number
     allowNews: number
     allowImages: number
+    allowVideos: number
     startDate: number
     endDate: number
     isActive: number
@@ -1668,6 +1893,7 @@ export namespace Prisma {
     allowBlogs?: true
     allowNews?: true
     allowImages?: true
+    allowVideos?: true
     startDate?: true
     endDate?: true
     isActive?: true
@@ -1693,6 +1919,7 @@ export namespace Prisma {
     allowBlogs?: true
     allowNews?: true
     allowImages?: true
+    allowVideos?: true
     startDate?: true
     endDate?: true
     isActive?: true
@@ -1718,6 +1945,7 @@ export namespace Prisma {
     allowBlogs?: true
     allowNews?: true
     allowImages?: true
+    allowVideos?: true
     startDate?: true
     endDate?: true
     isActive?: true
@@ -1816,6 +2044,7 @@ export namespace Prisma {
     allowBlogs: boolean
     allowNews: boolean
     allowImages: boolean
+    allowVideos: boolean
     startDate: Date
     endDate: Date
     isActive: boolean
@@ -1858,6 +2087,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
@@ -1868,6 +2098,7 @@ export namespace Prisma {
     blogs?: boolean | User$blogsArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
     imageFolders?: boolean | User$imageFoldersArgs<ExtArgs>
+    VideoFolders?: boolean | User$VideoFoldersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1887,6 +2118,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
@@ -1912,6 +2144,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
@@ -1937,6 +2170,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: boolean
     endDate?: boolean
     isActive?: boolean
@@ -1946,11 +2180,12 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company_name" | "website" | "email" | "logo" | "primary_color" | "secondary_color" | "name" | "contact_number" | "address" | "password" | "role" | "allowBlogs" | "allowNews" | "allowImages" | "startDate" | "endDate" | "isActive" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company_name" | "website" | "email" | "logo" | "primary_color" | "secondary_color" | "name" | "contact_number" | "address" | "password" | "role" | "allowBlogs" | "allowNews" | "allowImages" | "allowVideos" | "startDate" | "endDate" | "isActive" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     blogs?: boolean | User$blogsArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
     imageFolders?: boolean | User$imageFoldersArgs<ExtArgs>
+    VideoFolders?: boolean | User$VideoFoldersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1962,6 +2197,7 @@ export namespace Prisma {
       blogs: Prisma.$BlogPayload<ExtArgs>[]
       news: Prisma.$NewsPayload<ExtArgs>[]
       imageFolders: Prisma.$ImageFolderPayload<ExtArgs>[]
+      VideoFolders: Prisma.$VideoFolderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1979,6 +2215,7 @@ export namespace Prisma {
       allowBlogs: boolean
       allowNews: boolean
       allowImages: boolean
+      allowVideos: boolean
       startDate: Date
       endDate: Date
       isActive: boolean
@@ -2383,6 +2620,7 @@ export namespace Prisma {
     blogs<T extends User$blogsArgs<ExtArgs> = {}>(args?: Subset<T, User$blogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     imageFolders<T extends User$imageFoldersArgs<ExtArgs> = {}>(args?: Subset<T, User$imageFoldersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImageFolderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    VideoFolders<T extends User$VideoFoldersArgs<ExtArgs> = {}>(args?: Subset<T, User$VideoFoldersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2427,6 +2665,7 @@ export namespace Prisma {
     readonly allowBlogs: FieldRef<"User", 'Boolean'>
     readonly allowNews: FieldRef<"User", 'Boolean'>
     readonly allowImages: FieldRef<"User", 'Boolean'>
+    readonly allowVideos: FieldRef<"User", 'Boolean'>
     readonly startDate: FieldRef<"User", 'DateTime'>
     readonly endDate: FieldRef<"User", 'DateTime'>
     readonly isActive: FieldRef<"User", 'Boolean'>
@@ -2891,6 +3130,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ImageFolderScalarFieldEnum | ImageFolderScalarFieldEnum[]
+  }
+
+  /**
+   * User.VideoFolders
+   */
+  export type User$VideoFoldersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    where?: VideoFolderWhereInput
+    orderBy?: VideoFolderOrderByWithRelationInput | VideoFolderOrderByWithRelationInput[]
+    cursor?: VideoFolderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideoFolderScalarFieldEnum | VideoFolderScalarFieldEnum[]
   }
 
   /**
@@ -6238,6 +6501,2165 @@ export namespace Prisma {
 
 
   /**
+   * Model VideoFolder
+   */
+
+  export type AggregateVideoFolder = {
+    _count: VideoFolderCountAggregateOutputType | null
+    _min: VideoFolderMinAggregateOutputType | null
+    _max: VideoFolderMaxAggregateOutputType | null
+  }
+
+  export type VideoFolderMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    createdAt: Date | null
+    userId: string | null
+  }
+
+  export type VideoFolderMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    createdAt: Date | null
+    userId: string | null
+  }
+
+  export type VideoFolderCountAggregateOutputType = {
+    id: number
+    title: number
+    createdAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type VideoFolderMinAggregateInputType = {
+    id?: true
+    title?: true
+    createdAt?: true
+    userId?: true
+  }
+
+  export type VideoFolderMaxAggregateInputType = {
+    id?: true
+    title?: true
+    createdAt?: true
+    userId?: true
+  }
+
+  export type VideoFolderCountAggregateInputType = {
+    id?: true
+    title?: true
+    createdAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type VideoFolderAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VideoFolder to aggregate.
+     */
+    where?: VideoFolderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoFolders to fetch.
+     */
+    orderBy?: VideoFolderOrderByWithRelationInput | VideoFolderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VideoFolderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoFolders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoFolders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VideoFolders
+    **/
+    _count?: true | VideoFolderCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VideoFolderMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VideoFolderMaxAggregateInputType
+  }
+
+  export type GetVideoFolderAggregateType<T extends VideoFolderAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideoFolder]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideoFolder[P]>
+      : GetScalarType<T[P], AggregateVideoFolder[P]>
+  }
+
+
+
+
+  export type VideoFolderGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoFolderWhereInput
+    orderBy?: VideoFolderOrderByWithAggregationInput | VideoFolderOrderByWithAggregationInput[]
+    by: VideoFolderScalarFieldEnum[] | VideoFolderScalarFieldEnum
+    having?: VideoFolderScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VideoFolderCountAggregateInputType | true
+    _min?: VideoFolderMinAggregateInputType
+    _max?: VideoFolderMaxAggregateInputType
+  }
+
+  export type VideoFolderGroupByOutputType = {
+    id: string
+    title: string
+    createdAt: Date
+    userId: string
+    _count: VideoFolderCountAggregateOutputType | null
+    _min: VideoFolderMinAggregateOutputType | null
+    _max: VideoFolderMaxAggregateOutputType | null
+  }
+
+  type GetVideoFolderGroupByPayload<T extends VideoFolderGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VideoFolderGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VideoFolderGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VideoFolderGroupByOutputType[P]>
+            : GetScalarType<T[P], VideoFolderGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VideoFolderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    videos?: boolean | VideoFolder$videosArgs<ExtArgs>
+    _count?: boolean | VideoFolderCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videoFolder"]>
+
+  export type VideoFolderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videoFolder"]>
+
+  export type VideoFolderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videoFolder"]>
+
+  export type VideoFolderSelectScalar = {
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+  }
+
+  export type VideoFolderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "createdAt" | "userId", ExtArgs["result"]["videoFolder"]>
+  export type VideoFolderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    videos?: boolean | VideoFolder$videosArgs<ExtArgs>
+    _count?: boolean | VideoFolderCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type VideoFolderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type VideoFolderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $VideoFolderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VideoFolder"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      videos: Prisma.$VideoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      createdAt: Date
+      userId: string
+    }, ExtArgs["result"]["videoFolder"]>
+    composites: {}
+  }
+
+  type VideoFolderGetPayload<S extends boolean | null | undefined | VideoFolderDefaultArgs> = $Result.GetResult<Prisma.$VideoFolderPayload, S>
+
+  type VideoFolderCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VideoFolderFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VideoFolderCountAggregateInputType | true
+    }
+
+  export interface VideoFolderDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VideoFolder'], meta: { name: 'VideoFolder' } }
+    /**
+     * Find zero or one VideoFolder that matches the filter.
+     * @param {VideoFolderFindUniqueArgs} args - Arguments to find a VideoFolder
+     * @example
+     * // Get one VideoFolder
+     * const videoFolder = await prisma.videoFolder.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VideoFolderFindUniqueArgs>(args: SelectSubset<T, VideoFolderFindUniqueArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VideoFolder that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VideoFolderFindUniqueOrThrowArgs} args - Arguments to find a VideoFolder
+     * @example
+     * // Get one VideoFolder
+     * const videoFolder = await prisma.videoFolder.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VideoFolderFindUniqueOrThrowArgs>(args: SelectSubset<T, VideoFolderFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VideoFolder that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFolderFindFirstArgs} args - Arguments to find a VideoFolder
+     * @example
+     * // Get one VideoFolder
+     * const videoFolder = await prisma.videoFolder.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VideoFolderFindFirstArgs>(args?: SelectSubset<T, VideoFolderFindFirstArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VideoFolder that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFolderFindFirstOrThrowArgs} args - Arguments to find a VideoFolder
+     * @example
+     * // Get one VideoFolder
+     * const videoFolder = await prisma.videoFolder.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VideoFolderFindFirstOrThrowArgs>(args?: SelectSubset<T, VideoFolderFindFirstOrThrowArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VideoFolders that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFolderFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VideoFolders
+     * const videoFolders = await prisma.videoFolder.findMany()
+     * 
+     * // Get first 10 VideoFolders
+     * const videoFolders = await prisma.videoFolder.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const videoFolderWithIdOnly = await prisma.videoFolder.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VideoFolderFindManyArgs>(args?: SelectSubset<T, VideoFolderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VideoFolder.
+     * @param {VideoFolderCreateArgs} args - Arguments to create a VideoFolder.
+     * @example
+     * // Create one VideoFolder
+     * const VideoFolder = await prisma.videoFolder.create({
+     *   data: {
+     *     // ... data to create a VideoFolder
+     *   }
+     * })
+     * 
+     */
+    create<T extends VideoFolderCreateArgs>(args: SelectSubset<T, VideoFolderCreateArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VideoFolders.
+     * @param {VideoFolderCreateManyArgs} args - Arguments to create many VideoFolders.
+     * @example
+     * // Create many VideoFolders
+     * const videoFolder = await prisma.videoFolder.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VideoFolderCreateManyArgs>(args?: SelectSubset<T, VideoFolderCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VideoFolders and returns the data saved in the database.
+     * @param {VideoFolderCreateManyAndReturnArgs} args - Arguments to create many VideoFolders.
+     * @example
+     * // Create many VideoFolders
+     * const videoFolder = await prisma.videoFolder.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VideoFolders and only return the `id`
+     * const videoFolderWithIdOnly = await prisma.videoFolder.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VideoFolderCreateManyAndReturnArgs>(args?: SelectSubset<T, VideoFolderCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VideoFolder.
+     * @param {VideoFolderDeleteArgs} args - Arguments to delete one VideoFolder.
+     * @example
+     * // Delete one VideoFolder
+     * const VideoFolder = await prisma.videoFolder.delete({
+     *   where: {
+     *     // ... filter to delete one VideoFolder
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VideoFolderDeleteArgs>(args: SelectSubset<T, VideoFolderDeleteArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VideoFolder.
+     * @param {VideoFolderUpdateArgs} args - Arguments to update one VideoFolder.
+     * @example
+     * // Update one VideoFolder
+     * const videoFolder = await prisma.videoFolder.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VideoFolderUpdateArgs>(args: SelectSubset<T, VideoFolderUpdateArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VideoFolders.
+     * @param {VideoFolderDeleteManyArgs} args - Arguments to filter VideoFolders to delete.
+     * @example
+     * // Delete a few VideoFolders
+     * const { count } = await prisma.videoFolder.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VideoFolderDeleteManyArgs>(args?: SelectSubset<T, VideoFolderDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VideoFolders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFolderUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VideoFolders
+     * const videoFolder = await prisma.videoFolder.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VideoFolderUpdateManyArgs>(args: SelectSubset<T, VideoFolderUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VideoFolders and returns the data updated in the database.
+     * @param {VideoFolderUpdateManyAndReturnArgs} args - Arguments to update many VideoFolders.
+     * @example
+     * // Update many VideoFolders
+     * const videoFolder = await prisma.videoFolder.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VideoFolders and only return the `id`
+     * const videoFolderWithIdOnly = await prisma.videoFolder.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VideoFolderUpdateManyAndReturnArgs>(args: SelectSubset<T, VideoFolderUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VideoFolder.
+     * @param {VideoFolderUpsertArgs} args - Arguments to update or create a VideoFolder.
+     * @example
+     * // Update or create a VideoFolder
+     * const videoFolder = await prisma.videoFolder.upsert({
+     *   create: {
+     *     // ... data to create a VideoFolder
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VideoFolder we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VideoFolderUpsertArgs>(args: SelectSubset<T, VideoFolderUpsertArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VideoFolders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFolderCountArgs} args - Arguments to filter VideoFolders to count.
+     * @example
+     * // Count the number of VideoFolders
+     * const count = await prisma.videoFolder.count({
+     *   where: {
+     *     // ... the filter for the VideoFolders we want to count
+     *   }
+     * })
+    **/
+    count<T extends VideoFolderCountArgs>(
+      args?: Subset<T, VideoFolderCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VideoFolderCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VideoFolder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFolderAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VideoFolderAggregateArgs>(args: Subset<T, VideoFolderAggregateArgs>): Prisma.PrismaPromise<GetVideoFolderAggregateType<T>>
+
+    /**
+     * Group by VideoFolder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFolderGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VideoFolderGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VideoFolderGroupByArgs['orderBy'] }
+        : { orderBy?: VideoFolderGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VideoFolderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideoFolderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VideoFolder model
+   */
+  readonly fields: VideoFolderFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VideoFolder.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VideoFolderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    videos<T extends VideoFolder$videosArgs<ExtArgs> = {}>(args?: Subset<T, VideoFolder$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VideoFolder model
+   */
+  interface VideoFolderFieldRefs {
+    readonly id: FieldRef<"VideoFolder", 'String'>
+    readonly title: FieldRef<"VideoFolder", 'String'>
+    readonly createdAt: FieldRef<"VideoFolder", 'DateTime'>
+    readonly userId: FieldRef<"VideoFolder", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VideoFolder findUnique
+   */
+  export type VideoFolderFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoFolder to fetch.
+     */
+    where: VideoFolderWhereUniqueInput
+  }
+
+  /**
+   * VideoFolder findUniqueOrThrow
+   */
+  export type VideoFolderFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoFolder to fetch.
+     */
+    where: VideoFolderWhereUniqueInput
+  }
+
+  /**
+   * VideoFolder findFirst
+   */
+  export type VideoFolderFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoFolder to fetch.
+     */
+    where?: VideoFolderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoFolders to fetch.
+     */
+    orderBy?: VideoFolderOrderByWithRelationInput | VideoFolderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VideoFolders.
+     */
+    cursor?: VideoFolderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoFolders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoFolders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VideoFolders.
+     */
+    distinct?: VideoFolderScalarFieldEnum | VideoFolderScalarFieldEnum[]
+  }
+
+  /**
+   * VideoFolder findFirstOrThrow
+   */
+  export type VideoFolderFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoFolder to fetch.
+     */
+    where?: VideoFolderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoFolders to fetch.
+     */
+    orderBy?: VideoFolderOrderByWithRelationInput | VideoFolderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VideoFolders.
+     */
+    cursor?: VideoFolderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoFolders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoFolders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VideoFolders.
+     */
+    distinct?: VideoFolderScalarFieldEnum | VideoFolderScalarFieldEnum[]
+  }
+
+  /**
+   * VideoFolder findMany
+   */
+  export type VideoFolderFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoFolders to fetch.
+     */
+    where?: VideoFolderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoFolders to fetch.
+     */
+    orderBy?: VideoFolderOrderByWithRelationInput | VideoFolderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VideoFolders.
+     */
+    cursor?: VideoFolderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoFolders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoFolders.
+     */
+    skip?: number
+    distinct?: VideoFolderScalarFieldEnum | VideoFolderScalarFieldEnum[]
+  }
+
+  /**
+   * VideoFolder create
+   */
+  export type VideoFolderCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VideoFolder.
+     */
+    data: XOR<VideoFolderCreateInput, VideoFolderUncheckedCreateInput>
+  }
+
+  /**
+   * VideoFolder createMany
+   */
+  export type VideoFolderCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VideoFolders.
+     */
+    data: VideoFolderCreateManyInput | VideoFolderCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VideoFolder createManyAndReturn
+   */
+  export type VideoFolderCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * The data used to create many VideoFolders.
+     */
+    data: VideoFolderCreateManyInput | VideoFolderCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VideoFolder update
+   */
+  export type VideoFolderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VideoFolder.
+     */
+    data: XOR<VideoFolderUpdateInput, VideoFolderUncheckedUpdateInput>
+    /**
+     * Choose, which VideoFolder to update.
+     */
+    where: VideoFolderWhereUniqueInput
+  }
+
+  /**
+   * VideoFolder updateMany
+   */
+  export type VideoFolderUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VideoFolders.
+     */
+    data: XOR<VideoFolderUpdateManyMutationInput, VideoFolderUncheckedUpdateManyInput>
+    /**
+     * Filter which VideoFolders to update
+     */
+    where?: VideoFolderWhereInput
+    /**
+     * Limit how many VideoFolders to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VideoFolder updateManyAndReturn
+   */
+  export type VideoFolderUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * The data used to update VideoFolders.
+     */
+    data: XOR<VideoFolderUpdateManyMutationInput, VideoFolderUncheckedUpdateManyInput>
+    /**
+     * Filter which VideoFolders to update
+     */
+    where?: VideoFolderWhereInput
+    /**
+     * Limit how many VideoFolders to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VideoFolder upsert
+   */
+  export type VideoFolderUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VideoFolder to update in case it exists.
+     */
+    where: VideoFolderWhereUniqueInput
+    /**
+     * In case the VideoFolder found by the `where` argument doesn't exist, create a new VideoFolder with this data.
+     */
+    create: XOR<VideoFolderCreateInput, VideoFolderUncheckedCreateInput>
+    /**
+     * In case the VideoFolder was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VideoFolderUpdateInput, VideoFolderUncheckedUpdateInput>
+  }
+
+  /**
+   * VideoFolder delete
+   */
+  export type VideoFolderDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+    /**
+     * Filter which VideoFolder to delete.
+     */
+    where: VideoFolderWhereUniqueInput
+  }
+
+  /**
+   * VideoFolder deleteMany
+   */
+  export type VideoFolderDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VideoFolders to delete
+     */
+    where?: VideoFolderWhereInput
+    /**
+     * Limit how many VideoFolders to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VideoFolder.videos
+   */
+  export type VideoFolder$videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    where?: VideoWhereInput
+    orderBy?: VideoOrderByWithRelationInput | VideoOrderByWithRelationInput[]
+    cursor?: VideoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideoScalarFieldEnum | VideoScalarFieldEnum[]
+  }
+
+  /**
+   * VideoFolder without action
+   */
+  export type VideoFolderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoFolder
+     */
+    select?: VideoFolderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoFolder
+     */
+    omit?: VideoFolderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoFolderInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Video
+   */
+
+  export type AggregateVideo = {
+    _count: VideoCountAggregateOutputType | null
+    _min: VideoMinAggregateOutputType | null
+    _max: VideoMaxAggregateOutputType | null
+  }
+
+  export type VideoMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    language: string | null
+    location: string | null
+    url: string | null
+    createdAt: Date | null
+    folderId: string | null
+  }
+
+  export type VideoMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    language: string | null
+    location: string | null
+    url: string | null
+    createdAt: Date | null
+    folderId: string | null
+  }
+
+  export type VideoCountAggregateOutputType = {
+    id: number
+    title: number
+    language: number
+    location: number
+    url: number
+    createdAt: number
+    folderId: number
+    _all: number
+  }
+
+
+  export type VideoMinAggregateInputType = {
+    id?: true
+    title?: true
+    language?: true
+    location?: true
+    url?: true
+    createdAt?: true
+    folderId?: true
+  }
+
+  export type VideoMaxAggregateInputType = {
+    id?: true
+    title?: true
+    language?: true
+    location?: true
+    url?: true
+    createdAt?: true
+    folderId?: true
+  }
+
+  export type VideoCountAggregateInputType = {
+    id?: true
+    title?: true
+    language?: true
+    location?: true
+    url?: true
+    createdAt?: true
+    folderId?: true
+    _all?: true
+  }
+
+  export type VideoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Video to aggregate.
+     */
+    where?: VideoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videos to fetch.
+     */
+    orderBy?: VideoOrderByWithRelationInput | VideoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VideoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Videos
+    **/
+    _count?: true | VideoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VideoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VideoMaxAggregateInputType
+  }
+
+  export type GetVideoAggregateType<T extends VideoAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideo]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideo[P]>
+      : GetScalarType<T[P], AggregateVideo[P]>
+  }
+
+
+
+
+  export type VideoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoWhereInput
+    orderBy?: VideoOrderByWithAggregationInput | VideoOrderByWithAggregationInput[]
+    by: VideoScalarFieldEnum[] | VideoScalarFieldEnum
+    having?: VideoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VideoCountAggregateInputType | true
+    _min?: VideoMinAggregateInputType
+    _max?: VideoMaxAggregateInputType
+  }
+
+  export type VideoGroupByOutputType = {
+    id: string
+    title: string
+    language: string | null
+    location: string | null
+    url: string
+    createdAt: Date
+    folderId: string
+    _count: VideoCountAggregateOutputType | null
+    _min: VideoMinAggregateOutputType | null
+    _max: VideoMaxAggregateOutputType | null
+  }
+
+  type GetVideoGroupByPayload<T extends VideoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VideoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VideoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VideoGroupByOutputType[P]>
+            : GetScalarType<T[P], VideoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VideoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    language?: boolean
+    location?: boolean
+    url?: boolean
+    createdAt?: boolean
+    folderId?: boolean
+    folder?: boolean | VideoFolderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video"]>
+
+  export type VideoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    language?: boolean
+    location?: boolean
+    url?: boolean
+    createdAt?: boolean
+    folderId?: boolean
+    folder?: boolean | VideoFolderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video"]>
+
+  export type VideoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    language?: boolean
+    location?: boolean
+    url?: boolean
+    createdAt?: boolean
+    folderId?: boolean
+    folder?: boolean | VideoFolderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["video"]>
+
+  export type VideoSelectScalar = {
+    id?: boolean
+    title?: boolean
+    language?: boolean
+    location?: boolean
+    url?: boolean
+    createdAt?: boolean
+    folderId?: boolean
+  }
+
+  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "language" | "location" | "url" | "createdAt" | "folderId", ExtArgs["result"]["video"]>
+  export type VideoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    folder?: boolean | VideoFolderDefaultArgs<ExtArgs>
+  }
+  export type VideoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    folder?: boolean | VideoFolderDefaultArgs<ExtArgs>
+  }
+  export type VideoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    folder?: boolean | VideoFolderDefaultArgs<ExtArgs>
+  }
+
+  export type $VideoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Video"
+    objects: {
+      folder: Prisma.$VideoFolderPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      language: string | null
+      location: string | null
+      url: string
+      createdAt: Date
+      folderId: string
+    }, ExtArgs["result"]["video"]>
+    composites: {}
+  }
+
+  type VideoGetPayload<S extends boolean | null | undefined | VideoDefaultArgs> = $Result.GetResult<Prisma.$VideoPayload, S>
+
+  type VideoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VideoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VideoCountAggregateInputType | true
+    }
+
+  export interface VideoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Video'], meta: { name: 'Video' } }
+    /**
+     * Find zero or one Video that matches the filter.
+     * @param {VideoFindUniqueArgs} args - Arguments to find a Video
+     * @example
+     * // Get one Video
+     * const video = await prisma.video.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VideoFindUniqueArgs>(args: SelectSubset<T, VideoFindUniqueArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Video that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VideoFindUniqueOrThrowArgs} args - Arguments to find a Video
+     * @example
+     * // Get one Video
+     * const video = await prisma.video.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VideoFindUniqueOrThrowArgs>(args: SelectSubset<T, VideoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFindFirstArgs} args - Arguments to find a Video
+     * @example
+     * // Get one Video
+     * const video = await prisma.video.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VideoFindFirstArgs>(args?: SelectSubset<T, VideoFindFirstArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Video that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFindFirstOrThrowArgs} args - Arguments to find a Video
+     * @example
+     * // Get one Video
+     * const video = await prisma.video.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VideoFindFirstOrThrowArgs>(args?: SelectSubset<T, VideoFindFirstOrThrowArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Videos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Videos
+     * const videos = await prisma.video.findMany()
+     * 
+     * // Get first 10 Videos
+     * const videos = await prisma.video.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const videoWithIdOnly = await prisma.video.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VideoFindManyArgs>(args?: SelectSubset<T, VideoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Video.
+     * @param {VideoCreateArgs} args - Arguments to create a Video.
+     * @example
+     * // Create one Video
+     * const Video = await prisma.video.create({
+     *   data: {
+     *     // ... data to create a Video
+     *   }
+     * })
+     * 
+     */
+    create<T extends VideoCreateArgs>(args: SelectSubset<T, VideoCreateArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Videos.
+     * @param {VideoCreateManyArgs} args - Arguments to create many Videos.
+     * @example
+     * // Create many Videos
+     * const video = await prisma.video.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VideoCreateManyArgs>(args?: SelectSubset<T, VideoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Videos and returns the data saved in the database.
+     * @param {VideoCreateManyAndReturnArgs} args - Arguments to create many Videos.
+     * @example
+     * // Create many Videos
+     * const video = await prisma.video.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Videos and only return the `id`
+     * const videoWithIdOnly = await prisma.video.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VideoCreateManyAndReturnArgs>(args?: SelectSubset<T, VideoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Video.
+     * @param {VideoDeleteArgs} args - Arguments to delete one Video.
+     * @example
+     * // Delete one Video
+     * const Video = await prisma.video.delete({
+     *   where: {
+     *     // ... filter to delete one Video
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VideoDeleteArgs>(args: SelectSubset<T, VideoDeleteArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Video.
+     * @param {VideoUpdateArgs} args - Arguments to update one Video.
+     * @example
+     * // Update one Video
+     * const video = await prisma.video.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VideoUpdateArgs>(args: SelectSubset<T, VideoUpdateArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Videos.
+     * @param {VideoDeleteManyArgs} args - Arguments to filter Videos to delete.
+     * @example
+     * // Delete a few Videos
+     * const { count } = await prisma.video.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VideoDeleteManyArgs>(args?: SelectSubset<T, VideoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Videos
+     * const video = await prisma.video.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VideoUpdateManyArgs>(args: SelectSubset<T, VideoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos and returns the data updated in the database.
+     * @param {VideoUpdateManyAndReturnArgs} args - Arguments to update many Videos.
+     * @example
+     * // Update many Videos
+     * const video = await prisma.video.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Videos and only return the `id`
+     * const videoWithIdOnly = await prisma.video.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VideoUpdateManyAndReturnArgs>(args: SelectSubset<T, VideoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Video.
+     * @param {VideoUpsertArgs} args - Arguments to update or create a Video.
+     * @example
+     * // Update or create a Video
+     * const video = await prisma.video.upsert({
+     *   create: {
+     *     // ... data to create a Video
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Video we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VideoUpsertArgs>(args: SelectSubset<T, VideoUpsertArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Videos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoCountArgs} args - Arguments to filter Videos to count.
+     * @example
+     * // Count the number of Videos
+     * const count = await prisma.video.count({
+     *   where: {
+     *     // ... the filter for the Videos we want to count
+     *   }
+     * })
+    **/
+    count<T extends VideoCountArgs>(
+      args?: Subset<T, VideoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VideoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Video.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VideoAggregateArgs>(args: Subset<T, VideoAggregateArgs>): Prisma.PrismaPromise<GetVideoAggregateType<T>>
+
+    /**
+     * Group by Video.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VideoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VideoGroupByArgs['orderBy'] }
+        : { orderBy?: VideoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VideoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Video model
+   */
+  readonly fields: VideoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Video.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VideoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    folder<T extends VideoFolderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VideoFolderDefaultArgs<ExtArgs>>): Prisma__VideoFolderClient<$Result.GetResult<Prisma.$VideoFolderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Video model
+   */
+  interface VideoFieldRefs {
+    readonly id: FieldRef<"Video", 'String'>
+    readonly title: FieldRef<"Video", 'String'>
+    readonly language: FieldRef<"Video", 'String'>
+    readonly location: FieldRef<"Video", 'String'>
+    readonly url: FieldRef<"Video", 'String'>
+    readonly createdAt: FieldRef<"Video", 'DateTime'>
+    readonly folderId: FieldRef<"Video", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Video findUnique
+   */
+  export type VideoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * Filter, which Video to fetch.
+     */
+    where: VideoWhereUniqueInput
+  }
+
+  /**
+   * Video findUniqueOrThrow
+   */
+  export type VideoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * Filter, which Video to fetch.
+     */
+    where: VideoWhereUniqueInput
+  }
+
+  /**
+   * Video findFirst
+   */
+  export type VideoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * Filter, which Video to fetch.
+     */
+    where?: VideoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videos to fetch.
+     */
+    orderBy?: VideoOrderByWithRelationInput | VideoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Videos.
+     */
+    cursor?: VideoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Videos.
+     */
+    distinct?: VideoScalarFieldEnum | VideoScalarFieldEnum[]
+  }
+
+  /**
+   * Video findFirstOrThrow
+   */
+  export type VideoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * Filter, which Video to fetch.
+     */
+    where?: VideoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videos to fetch.
+     */
+    orderBy?: VideoOrderByWithRelationInput | VideoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Videos.
+     */
+    cursor?: VideoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Videos.
+     */
+    distinct?: VideoScalarFieldEnum | VideoScalarFieldEnum[]
+  }
+
+  /**
+   * Video findMany
+   */
+  export type VideoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * Filter, which Videos to fetch.
+     */
+    where?: VideoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Videos to fetch.
+     */
+    orderBy?: VideoOrderByWithRelationInput | VideoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Videos.
+     */
+    cursor?: VideoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Videos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Videos.
+     */
+    skip?: number
+    distinct?: VideoScalarFieldEnum | VideoScalarFieldEnum[]
+  }
+
+  /**
+   * Video create
+   */
+  export type VideoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Video.
+     */
+    data: XOR<VideoCreateInput, VideoUncheckedCreateInput>
+  }
+
+  /**
+   * Video createMany
+   */
+  export type VideoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Videos.
+     */
+    data: VideoCreateManyInput | VideoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Video createManyAndReturn
+   */
+  export type VideoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Videos.
+     */
+    data: VideoCreateManyInput | VideoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Video update
+   */
+  export type VideoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Video.
+     */
+    data: XOR<VideoUpdateInput, VideoUncheckedUpdateInput>
+    /**
+     * Choose, which Video to update.
+     */
+    where: VideoWhereUniqueInput
+  }
+
+  /**
+   * Video updateMany
+   */
+  export type VideoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Videos.
+     */
+    data: XOR<VideoUpdateManyMutationInput, VideoUncheckedUpdateManyInput>
+    /**
+     * Filter which Videos to update
+     */
+    where?: VideoWhereInput
+    /**
+     * Limit how many Videos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Video updateManyAndReturn
+   */
+  export type VideoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * The data used to update Videos.
+     */
+    data: XOR<VideoUpdateManyMutationInput, VideoUncheckedUpdateManyInput>
+    /**
+     * Filter which Videos to update
+     */
+    where?: VideoWhereInput
+    /**
+     * Limit how many Videos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Video upsert
+   */
+  export type VideoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Video to update in case it exists.
+     */
+    where: VideoWhereUniqueInput
+    /**
+     * In case the Video found by the `where` argument doesn't exist, create a new Video with this data.
+     */
+    create: XOR<VideoCreateInput, VideoUncheckedCreateInput>
+    /**
+     * In case the Video was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VideoUpdateInput, VideoUncheckedUpdateInput>
+  }
+
+  /**
+   * Video delete
+   */
+  export type VideoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
+     * Filter which Video to delete.
+     */
+    where: VideoWhereUniqueInput
+  }
+
+  /**
+   * Video deleteMany
+   */
+  export type VideoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Videos to delete
+     */
+    where?: VideoWhereInput
+    /**
+     * Limit how many Videos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Video without action
+   */
+  export type VideoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model NewsContentBlock
    */
 
@@ -9539,6 +11961,7 @@ export namespace Prisma {
     allowBlogs: 'allowBlogs',
     allowNews: 'allowNews',
     allowImages: 'allowImages',
+    allowVideos: 'allowVideos',
     startDate: 'startDate',
     endDate: 'endDate',
     isActive: 'isActive',
@@ -9587,6 +12010,29 @@ export namespace Prisma {
   };
 
   export type NewsScalarFieldEnum = (typeof NewsScalarFieldEnum)[keyof typeof NewsScalarFieldEnum]
+
+
+  export const VideoFolderScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    createdAt: 'createdAt',
+    userId: 'userId'
+  };
+
+  export type VideoFolderScalarFieldEnum = (typeof VideoFolderScalarFieldEnum)[keyof typeof VideoFolderScalarFieldEnum]
+
+
+  export const VideoScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    language: 'language',
+    location: 'location',
+    url: 'url',
+    createdAt: 'createdAt',
+    folderId: 'folderId'
+  };
+
+  export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 
 
   export const NewsContentBlockScalarFieldEnum: {
@@ -9781,6 +12227,7 @@ export namespace Prisma {
     allowBlogs?: BoolFilter<"User"> | boolean
     allowNews?: BoolFilter<"User"> | boolean
     allowImages?: BoolFilter<"User"> | boolean
+    allowVideos?: BoolFilter<"User"> | boolean
     startDate?: DateTimeFilter<"User"> | Date | string
     endDate?: DateTimeFilter<"User"> | Date | string
     isActive?: BoolFilter<"User"> | boolean
@@ -9791,6 +12238,7 @@ export namespace Prisma {
     blogs?: BlogListRelationFilter
     news?: NewsListRelationFilter
     imageFolders?: ImageFolderListRelationFilter
+    VideoFolders?: VideoFolderListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9809,6 +12257,7 @@ export namespace Prisma {
     allowBlogs?: SortOrder
     allowNews?: SortOrder
     allowImages?: SortOrder
+    allowVideos?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
@@ -9819,6 +12268,7 @@ export namespace Prisma {
     blogs?: BlogOrderByRelationAggregateInput
     news?: NewsOrderByRelationAggregateInput
     imageFolders?: ImageFolderOrderByRelationAggregateInput
+    VideoFolders?: VideoFolderOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9840,6 +12290,7 @@ export namespace Prisma {
     allowBlogs?: BoolFilter<"User"> | boolean
     allowNews?: BoolFilter<"User"> | boolean
     allowImages?: BoolFilter<"User"> | boolean
+    allowVideos?: BoolFilter<"User"> | boolean
     startDate?: DateTimeFilter<"User"> | Date | string
     endDate?: DateTimeFilter<"User"> | Date | string
     isActive?: BoolFilter<"User"> | boolean
@@ -9850,6 +12301,7 @@ export namespace Prisma {
     blogs?: BlogListRelationFilter
     news?: NewsListRelationFilter
     imageFolders?: ImageFolderListRelationFilter
+    VideoFolders?: VideoFolderListRelationFilter
   }, "id" | "email" | "contact_number">
 
   export type UserOrderByWithAggregationInput = {
@@ -9868,6 +12320,7 @@ export namespace Prisma {
     allowBlogs?: SortOrder
     allowNews?: SortOrder
     allowImages?: SortOrder
+    allowVideos?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
@@ -9899,6 +12352,7 @@ export namespace Prisma {
     allowBlogs?: BoolWithAggregatesFilter<"User"> | boolean
     allowNews?: BoolWithAggregatesFilter<"User"> | boolean
     allowImages?: BoolWithAggregatesFilter<"User"> | boolean
+    allowVideos?: BoolWithAggregatesFilter<"User"> | boolean
     startDate?: DateTimeWithAggregatesFilter<"User"> | Date | string
     endDate?: DateTimeWithAggregatesFilter<"User"> | Date | string
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
@@ -10106,6 +12560,124 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"News"> | Date | string
   }
 
+  export type VideoFolderWhereInput = {
+    AND?: VideoFolderWhereInput | VideoFolderWhereInput[]
+    OR?: VideoFolderWhereInput[]
+    NOT?: VideoFolderWhereInput | VideoFolderWhereInput[]
+    id?: StringFilter<"VideoFolder"> | string
+    title?: StringFilter<"VideoFolder"> | string
+    createdAt?: DateTimeFilter<"VideoFolder"> | Date | string
+    userId?: StringFilter<"VideoFolder"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    videos?: VideoListRelationFilter
+  }
+
+  export type VideoFolderOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    videos?: VideoOrderByRelationAggregateInput
+  }
+
+  export type VideoFolderWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VideoFolderWhereInput | VideoFolderWhereInput[]
+    OR?: VideoFolderWhereInput[]
+    NOT?: VideoFolderWhereInput | VideoFolderWhereInput[]
+    title?: StringFilter<"VideoFolder"> | string
+    createdAt?: DateTimeFilter<"VideoFolder"> | Date | string
+    userId?: StringFilter<"VideoFolder"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    videos?: VideoListRelationFilter
+  }, "id">
+
+  export type VideoFolderOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    _count?: VideoFolderCountOrderByAggregateInput
+    _max?: VideoFolderMaxOrderByAggregateInput
+    _min?: VideoFolderMinOrderByAggregateInput
+  }
+
+  export type VideoFolderScalarWhereWithAggregatesInput = {
+    AND?: VideoFolderScalarWhereWithAggregatesInput | VideoFolderScalarWhereWithAggregatesInput[]
+    OR?: VideoFolderScalarWhereWithAggregatesInput[]
+    NOT?: VideoFolderScalarWhereWithAggregatesInput | VideoFolderScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"VideoFolder"> | string
+    title?: StringWithAggregatesFilter<"VideoFolder"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"VideoFolder"> | Date | string
+    userId?: StringWithAggregatesFilter<"VideoFolder"> | string
+  }
+
+  export type VideoWhereInput = {
+    AND?: VideoWhereInput | VideoWhereInput[]
+    OR?: VideoWhereInput[]
+    NOT?: VideoWhereInput | VideoWhereInput[]
+    id?: StringFilter<"Video"> | string
+    title?: StringFilter<"Video"> | string
+    language?: StringNullableFilter<"Video"> | string | null
+    location?: StringNullableFilter<"Video"> | string | null
+    url?: StringFilter<"Video"> | string
+    createdAt?: DateTimeFilter<"Video"> | Date | string
+    folderId?: StringFilter<"Video"> | string
+    folder?: XOR<VideoFolderScalarRelationFilter, VideoFolderWhereInput>
+  }
+
+  export type VideoOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    language?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    folderId?: SortOrder
+    folder?: VideoFolderOrderByWithRelationInput
+  }
+
+  export type VideoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VideoWhereInput | VideoWhereInput[]
+    OR?: VideoWhereInput[]
+    NOT?: VideoWhereInput | VideoWhereInput[]
+    title?: StringFilter<"Video"> | string
+    language?: StringNullableFilter<"Video"> | string | null
+    location?: StringNullableFilter<"Video"> | string | null
+    url?: StringFilter<"Video"> | string
+    createdAt?: DateTimeFilter<"Video"> | Date | string
+    folderId?: StringFilter<"Video"> | string
+    folder?: XOR<VideoFolderScalarRelationFilter, VideoFolderWhereInput>
+  }, "id">
+
+  export type VideoOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    language?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    folderId?: SortOrder
+    _count?: VideoCountOrderByAggregateInput
+    _max?: VideoMaxOrderByAggregateInput
+    _min?: VideoMinOrderByAggregateInput
+  }
+
+  export type VideoScalarWhereWithAggregatesInput = {
+    AND?: VideoScalarWhereWithAggregatesInput | VideoScalarWhereWithAggregatesInput[]
+    OR?: VideoScalarWhereWithAggregatesInput[]
+    NOT?: VideoScalarWhereWithAggregatesInput | VideoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Video"> | string
+    title?: StringWithAggregatesFilter<"Video"> | string
+    language?: StringNullableWithAggregatesFilter<"Video"> | string | null
+    location?: StringNullableWithAggregatesFilter<"Video"> | string | null
+    url?: StringWithAggregatesFilter<"Video"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Video"> | Date | string
+    folderId?: StringWithAggregatesFilter<"Video"> | string
+  }
+
   export type NewsContentBlockWhereInput = {
     AND?: NewsContentBlockWhereInput | NewsContentBlockWhereInput[]
     OR?: NewsContentBlockWhereInput[]
@@ -10294,6 +12866,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -10304,6 +12877,7 @@ export namespace Prisma {
     blogs?: BlogCreateNestedManyWithoutUserInput
     news?: NewsCreateNestedManyWithoutUserInput
     imageFolders?: ImageFolderCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10322,6 +12896,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -10332,6 +12907,7 @@ export namespace Prisma {
     blogs?: BlogUncheckedCreateNestedManyWithoutUserInput
     news?: NewsUncheckedCreateNestedManyWithoutUserInput
     imageFolders?: ImageFolderUncheckedCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10350,6 +12926,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -10360,6 +12937,7 @@ export namespace Prisma {
     blogs?: BlogUpdateManyWithoutUserNestedInput
     news?: NewsUpdateManyWithoutUserNestedInput
     imageFolders?: ImageFolderUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10378,6 +12956,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -10388,6 +12967,7 @@ export namespace Prisma {
     blogs?: BlogUncheckedUpdateManyWithoutUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutUserNestedInput
     imageFolders?: ImageFolderUncheckedUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10406,6 +12986,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -10431,6 +13012,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -10456,6 +13038,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -10671,6 +13254,127 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoFolderCreateInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutVideoFoldersInput
+    videos?: VideoCreateNestedManyWithoutFolderInput
+  }
+
+  export type VideoFolderUncheckedCreateInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    userId: string
+    videos?: VideoUncheckedCreateNestedManyWithoutFolderInput
+  }
+
+  export type VideoFolderUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutVideoFoldersNestedInput
+    videos?: VideoUpdateManyWithoutFolderNestedInput
+  }
+
+  export type VideoFolderUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    videos?: VideoUncheckedUpdateManyWithoutFolderNestedInput
+  }
+
+  export type VideoFolderCreateManyInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    userId: string
+  }
+
+  export type VideoFolderUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoFolderUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VideoCreateInput = {
+    id?: string
+    title: string
+    language?: string | null
+    location?: string | null
+    url: string
+    createdAt?: Date | string
+    folder: VideoFolderCreateNestedOneWithoutVideosInput
+  }
+
+  export type VideoUncheckedCreateInput = {
+    id?: string
+    title: string
+    language?: string | null
+    location?: string | null
+    url: string
+    createdAt?: Date | string
+    folderId: string
+  }
+
+  export type VideoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folder?: VideoFolderUpdateOneRequiredWithoutVideosNestedInput
+  }
+
+  export type VideoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folderId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VideoCreateManyInput = {
+    id?: string
+    title: string
+    language?: string | null
+    location?: string | null
+    url: string
+    createdAt?: Date | string
+    folderId: string
+  }
+
+  export type VideoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folderId?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewsContentBlockCreateInput = {
@@ -10909,6 +13613,12 @@ export namespace Prisma {
     none?: ImageFolderWhereInput
   }
 
+  export type VideoFolderListRelationFilter = {
+    every?: VideoFolderWhereInput
+    some?: VideoFolderWhereInput
+    none?: VideoFolderWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -10923,6 +13633,10 @@ export namespace Prisma {
   }
 
   export type ImageFolderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VideoFolderOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10942,6 +13656,7 @@ export namespace Prisma {
     allowBlogs?: SortOrder
     allowNews?: SortOrder
     allowImages?: SortOrder
+    allowVideos?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
@@ -10967,6 +13682,7 @@ export namespace Prisma {
     allowBlogs?: SortOrder
     allowNews?: SortOrder
     allowImages?: SortOrder
+    allowVideos?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
@@ -10992,6 +13708,7 @@ export namespace Prisma {
     allowBlogs?: SortOrder
     allowNews?: SortOrder
     allowImages?: SortOrder
+    allowVideos?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
     isActive?: SortOrder
@@ -11295,6 +14012,72 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type VideoListRelationFilter = {
+    every?: VideoWhereInput
+    some?: VideoWhereInput
+    none?: VideoWhereInput
+  }
+
+  export type VideoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VideoFolderCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type VideoFolderMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type VideoFolderMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type VideoFolderScalarRelationFilter = {
+    is?: VideoFolderWhereInput
+    isNot?: VideoFolderWhereInput
+  }
+
+  export type VideoCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    language?: SortOrder
+    location?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    folderId?: SortOrder
+  }
+
+  export type VideoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    language?: SortOrder
+    location?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    folderId?: SortOrder
+  }
+
+  export type VideoMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    language?: SortOrder
+    location?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    folderId?: SortOrder
+  }
+
   export type NewsScalarRelationFilter = {
     is?: NewsWhereInput
     isNot?: NewsWhereInput
@@ -11424,6 +14207,13 @@ export namespace Prisma {
     connect?: ImageFolderWhereUniqueInput | ImageFolderWhereUniqueInput[]
   }
 
+  export type VideoFolderCreateNestedManyWithoutUserInput = {
+    create?: XOR<VideoFolderCreateWithoutUserInput, VideoFolderUncheckedCreateWithoutUserInput> | VideoFolderCreateWithoutUserInput[] | VideoFolderUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VideoFolderCreateOrConnectWithoutUserInput | VideoFolderCreateOrConnectWithoutUserInput[]
+    createMany?: VideoFolderCreateManyUserInputEnvelope
+    connect?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+  }
+
   export type BlogUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<BlogCreateWithoutUserInput, BlogUncheckedCreateWithoutUserInput> | BlogCreateWithoutUserInput[] | BlogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BlogCreateOrConnectWithoutUserInput | BlogCreateOrConnectWithoutUserInput[]
@@ -11443,6 +14233,13 @@ export namespace Prisma {
     connectOrCreate?: ImageFolderCreateOrConnectWithoutUserInput | ImageFolderCreateOrConnectWithoutUserInput[]
     createMany?: ImageFolderCreateManyUserInputEnvelope
     connect?: ImageFolderWhereUniqueInput | ImageFolderWhereUniqueInput[]
+  }
+
+  export type VideoFolderUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<VideoFolderCreateWithoutUserInput, VideoFolderUncheckedCreateWithoutUserInput> | VideoFolderCreateWithoutUserInput[] | VideoFolderUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VideoFolderCreateOrConnectWithoutUserInput | VideoFolderCreateOrConnectWithoutUserInput[]
+    createMany?: VideoFolderCreateManyUserInputEnvelope
+    connect?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11507,6 +14304,20 @@ export namespace Prisma {
     deleteMany?: ImageFolderScalarWhereInput | ImageFolderScalarWhereInput[]
   }
 
+  export type VideoFolderUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VideoFolderCreateWithoutUserInput, VideoFolderUncheckedCreateWithoutUserInput> | VideoFolderCreateWithoutUserInput[] | VideoFolderUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VideoFolderCreateOrConnectWithoutUserInput | VideoFolderCreateOrConnectWithoutUserInput[]
+    upsert?: VideoFolderUpsertWithWhereUniqueWithoutUserInput | VideoFolderUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VideoFolderCreateManyUserInputEnvelope
+    set?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    disconnect?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    delete?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    connect?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    update?: VideoFolderUpdateWithWhereUniqueWithoutUserInput | VideoFolderUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VideoFolderUpdateManyWithWhereWithoutUserInput | VideoFolderUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VideoFolderScalarWhereInput | VideoFolderScalarWhereInput[]
+  }
+
   export type BlogUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<BlogCreateWithoutUserInput, BlogUncheckedCreateWithoutUserInput> | BlogCreateWithoutUserInput[] | BlogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BlogCreateOrConnectWithoutUserInput | BlogCreateOrConnectWithoutUserInput[]
@@ -11547,6 +14358,20 @@ export namespace Prisma {
     update?: ImageFolderUpdateWithWhereUniqueWithoutUserInput | ImageFolderUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ImageFolderUpdateManyWithWhereWithoutUserInput | ImageFolderUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ImageFolderScalarWhereInput | ImageFolderScalarWhereInput[]
+  }
+
+  export type VideoFolderUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VideoFolderCreateWithoutUserInput, VideoFolderUncheckedCreateWithoutUserInput> | VideoFolderCreateWithoutUserInput[] | VideoFolderUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VideoFolderCreateOrConnectWithoutUserInput | VideoFolderCreateOrConnectWithoutUserInput[]
+    upsert?: VideoFolderUpsertWithWhereUniqueWithoutUserInput | VideoFolderUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VideoFolderCreateManyUserInputEnvelope
+    set?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    disconnect?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    delete?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    connect?: VideoFolderWhereUniqueInput | VideoFolderWhereUniqueInput[]
+    update?: VideoFolderUpdateWithWhereUniqueWithoutUserInput | VideoFolderUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VideoFolderUpdateManyWithWhereWithoutUserInput | VideoFolderUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VideoFolderScalarWhereInput | VideoFolderScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutBlogsInput = {
@@ -11685,6 +14510,76 @@ export namespace Prisma {
     update?: NewsContentBlockUpdateWithWhereUniqueWithoutNewsInput | NewsContentBlockUpdateWithWhereUniqueWithoutNewsInput[]
     updateMany?: NewsContentBlockUpdateManyWithWhereWithoutNewsInput | NewsContentBlockUpdateManyWithWhereWithoutNewsInput[]
     deleteMany?: NewsContentBlockScalarWhereInput | NewsContentBlockScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutVideoFoldersInput = {
+    create?: XOR<UserCreateWithoutVideoFoldersInput, UserUncheckedCreateWithoutVideoFoldersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVideoFoldersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type VideoCreateNestedManyWithoutFolderInput = {
+    create?: XOR<VideoCreateWithoutFolderInput, VideoUncheckedCreateWithoutFolderInput> | VideoCreateWithoutFolderInput[] | VideoUncheckedCreateWithoutFolderInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutFolderInput | VideoCreateOrConnectWithoutFolderInput[]
+    createMany?: VideoCreateManyFolderInputEnvelope
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+  }
+
+  export type VideoUncheckedCreateNestedManyWithoutFolderInput = {
+    create?: XOR<VideoCreateWithoutFolderInput, VideoUncheckedCreateWithoutFolderInput> | VideoCreateWithoutFolderInput[] | VideoUncheckedCreateWithoutFolderInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutFolderInput | VideoCreateOrConnectWithoutFolderInput[]
+    createMany?: VideoCreateManyFolderInputEnvelope
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutVideoFoldersNestedInput = {
+    create?: XOR<UserCreateWithoutVideoFoldersInput, UserUncheckedCreateWithoutVideoFoldersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVideoFoldersInput
+    upsert?: UserUpsertWithoutVideoFoldersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideoFoldersInput, UserUpdateWithoutVideoFoldersInput>, UserUncheckedUpdateWithoutVideoFoldersInput>
+  }
+
+  export type VideoUpdateManyWithoutFolderNestedInput = {
+    create?: XOR<VideoCreateWithoutFolderInput, VideoUncheckedCreateWithoutFolderInput> | VideoCreateWithoutFolderInput[] | VideoUncheckedCreateWithoutFolderInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutFolderInput | VideoCreateOrConnectWithoutFolderInput[]
+    upsert?: VideoUpsertWithWhereUniqueWithoutFolderInput | VideoUpsertWithWhereUniqueWithoutFolderInput[]
+    createMany?: VideoCreateManyFolderInputEnvelope
+    set?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    disconnect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    delete?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    update?: VideoUpdateWithWhereUniqueWithoutFolderInput | VideoUpdateWithWhereUniqueWithoutFolderInput[]
+    updateMany?: VideoUpdateManyWithWhereWithoutFolderInput | VideoUpdateManyWithWhereWithoutFolderInput[]
+    deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
+  }
+
+  export type VideoUncheckedUpdateManyWithoutFolderNestedInput = {
+    create?: XOR<VideoCreateWithoutFolderInput, VideoUncheckedCreateWithoutFolderInput> | VideoCreateWithoutFolderInput[] | VideoUncheckedCreateWithoutFolderInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutFolderInput | VideoCreateOrConnectWithoutFolderInput[]
+    upsert?: VideoUpsertWithWhereUniqueWithoutFolderInput | VideoUpsertWithWhereUniqueWithoutFolderInput[]
+    createMany?: VideoCreateManyFolderInputEnvelope
+    set?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    disconnect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    delete?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    update?: VideoUpdateWithWhereUniqueWithoutFolderInput | VideoUpdateWithWhereUniqueWithoutFolderInput[]
+    updateMany?: VideoUpdateManyWithWhereWithoutFolderInput | VideoUpdateManyWithWhereWithoutFolderInput[]
+    deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
+  }
+
+  export type VideoFolderCreateNestedOneWithoutVideosInput = {
+    create?: XOR<VideoFolderCreateWithoutVideosInput, VideoFolderUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: VideoFolderCreateOrConnectWithoutVideosInput
+    connect?: VideoFolderWhereUniqueInput
+  }
+
+  export type VideoFolderUpdateOneRequiredWithoutVideosNestedInput = {
+    create?: XOR<VideoFolderCreateWithoutVideosInput, VideoFolderUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: VideoFolderCreateOrConnectWithoutVideosInput
+    upsert?: VideoFolderUpsertWithoutVideosInput
+    connect?: VideoFolderWhereUniqueInput
+    update?: XOR<XOR<VideoFolderUpdateToOneWithWhereWithoutVideosInput, VideoFolderUpdateWithoutVideosInput>, VideoFolderUncheckedUpdateWithoutVideosInput>
   }
 
   export type NewsCreateNestedOneWithoutContentsInput = {
@@ -12069,6 +14964,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type VideoFolderCreateWithoutUserInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    videos?: VideoCreateNestedManyWithoutFolderInput
+  }
+
+  export type VideoFolderUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    videos?: VideoUncheckedCreateNestedManyWithoutFolderInput
+  }
+
+  export type VideoFolderCreateOrConnectWithoutUserInput = {
+    where: VideoFolderWhereUniqueInput
+    create: XOR<VideoFolderCreateWithoutUserInput, VideoFolderUncheckedCreateWithoutUserInput>
+  }
+
+  export type VideoFolderCreateManyUserInputEnvelope = {
+    data: VideoFolderCreateManyUserInput | VideoFolderCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BlogUpsertWithWhereUniqueWithoutUserInput = {
     where: BlogWhereUniqueInput
     update: XOR<BlogUpdateWithoutUserInput, BlogUncheckedUpdateWithoutUserInput>
@@ -12153,6 +15072,32 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ImageFolder"> | Date | string
   }
 
+  export type VideoFolderUpsertWithWhereUniqueWithoutUserInput = {
+    where: VideoFolderWhereUniqueInput
+    update: XOR<VideoFolderUpdateWithoutUserInput, VideoFolderUncheckedUpdateWithoutUserInput>
+    create: XOR<VideoFolderCreateWithoutUserInput, VideoFolderUncheckedCreateWithoutUserInput>
+  }
+
+  export type VideoFolderUpdateWithWhereUniqueWithoutUserInput = {
+    where: VideoFolderWhereUniqueInput
+    data: XOR<VideoFolderUpdateWithoutUserInput, VideoFolderUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VideoFolderUpdateManyWithWhereWithoutUserInput = {
+    where: VideoFolderScalarWhereInput
+    data: XOR<VideoFolderUpdateManyMutationInput, VideoFolderUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VideoFolderScalarWhereInput = {
+    AND?: VideoFolderScalarWhereInput | VideoFolderScalarWhereInput[]
+    OR?: VideoFolderScalarWhereInput[]
+    NOT?: VideoFolderScalarWhereInput | VideoFolderScalarWhereInput[]
+    id?: StringFilter<"VideoFolder"> | string
+    title?: StringFilter<"VideoFolder"> | string
+    createdAt?: DateTimeFilter<"VideoFolder"> | Date | string
+    userId?: StringFilter<"VideoFolder"> | string
+  }
+
   export type UserCreateWithoutBlogsInput = {
     id?: string
     company_name: string
@@ -12169,6 +15114,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -12178,6 +15124,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     news?: NewsCreateNestedManyWithoutUserInput
     imageFolders?: ImageFolderCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlogsInput = {
@@ -12196,6 +15143,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -12205,6 +15153,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     news?: NewsUncheckedCreateNestedManyWithoutUserInput
     imageFolders?: ImageFolderUncheckedCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlogsInput = {
@@ -12265,6 +15214,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -12274,6 +15224,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     news?: NewsUpdateManyWithoutUserNestedInput
     imageFolders?: ImageFolderUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlogsInput = {
@@ -12292,6 +15243,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -12301,6 +15253,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     news?: NewsUncheckedUpdateManyWithoutUserNestedInput
     imageFolders?: ImageFolderUncheckedUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BlogContentBlockUpsertWithWhereUniqueWithoutBlogInput = {
@@ -12403,6 +15356,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -12412,6 +15366,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     blogs?: BlogCreateNestedManyWithoutUserInput
     imageFolders?: ImageFolderCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsInput = {
@@ -12430,6 +15385,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -12439,6 +15395,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     blogs?: BlogUncheckedCreateNestedManyWithoutUserInput
     imageFolders?: ImageFolderUncheckedCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsInput = {
@@ -12499,6 +15456,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -12508,6 +15466,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogs?: BlogUpdateManyWithoutUserNestedInput
     imageFolders?: ImageFolderUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsInput = {
@@ -12526,6 +15485,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -12535,6 +15495,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogs?: BlogUncheckedUpdateManyWithoutUserNestedInput
     imageFolders?: ImageFolderUncheckedUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsContentBlockUpsertWithWhereUniqueWithoutNewsInput = {
@@ -12563,6 +15524,239 @@ export namespace Prisma {
     order?: IntFilter<"NewsContentBlock"> | number
     createdAt?: DateTimeFilter<"NewsContentBlock"> | Date | string
     newsId?: StringFilter<"NewsContentBlock"> | string
+  }
+
+  export type UserCreateWithoutVideoFoldersInput = {
+    id?: string
+    company_name: string
+    website: string
+    email: string
+    logo: string
+    primary_color: string
+    secondary_color: string
+    name: string
+    contact_number: string
+    address: string
+    password: string
+    role?: $Enums.Role
+    allowBlogs?: boolean
+    allowNews?: boolean
+    allowImages?: boolean
+    allowVideos?: boolean
+    startDate?: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    blogs?: BlogCreateNestedManyWithoutUserInput
+    news?: NewsCreateNestedManyWithoutUserInput
+    imageFolders?: ImageFolderCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutVideoFoldersInput = {
+    id?: string
+    company_name: string
+    website: string
+    email: string
+    logo: string
+    primary_color: string
+    secondary_color: string
+    name: string
+    contact_number: string
+    address: string
+    password: string
+    role?: $Enums.Role
+    allowBlogs?: boolean
+    allowNews?: boolean
+    allowImages?: boolean
+    allowVideos?: boolean
+    startDate?: Date | string
+    endDate: Date | string
+    isActive?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    blogs?: BlogUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutUserInput
+    imageFolders?: ImageFolderUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutVideoFoldersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVideoFoldersInput, UserUncheckedCreateWithoutVideoFoldersInput>
+  }
+
+  export type VideoCreateWithoutFolderInput = {
+    id?: string
+    title: string
+    language?: string | null
+    location?: string | null
+    url: string
+    createdAt?: Date | string
+  }
+
+  export type VideoUncheckedCreateWithoutFolderInput = {
+    id?: string
+    title: string
+    language?: string | null
+    location?: string | null
+    url: string
+    createdAt?: Date | string
+  }
+
+  export type VideoCreateOrConnectWithoutFolderInput = {
+    where: VideoWhereUniqueInput
+    create: XOR<VideoCreateWithoutFolderInput, VideoUncheckedCreateWithoutFolderInput>
+  }
+
+  export type VideoCreateManyFolderInputEnvelope = {
+    data: VideoCreateManyFolderInput | VideoCreateManyFolderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutVideoFoldersInput = {
+    update: XOR<UserUpdateWithoutVideoFoldersInput, UserUncheckedUpdateWithoutVideoFoldersInput>
+    create: XOR<UserCreateWithoutVideoFoldersInput, UserUncheckedCreateWithoutVideoFoldersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVideoFoldersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVideoFoldersInput, UserUncheckedUpdateWithoutVideoFoldersInput>
+  }
+
+  export type UserUpdateWithoutVideoFoldersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    company_name?: StringFieldUpdateOperationsInput | string
+    website?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    logo?: StringFieldUpdateOperationsInput | string
+    primary_color?: StringFieldUpdateOperationsInput | string
+    secondary_color?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    allowBlogs?: BoolFieldUpdateOperationsInput | boolean
+    allowNews?: BoolFieldUpdateOperationsInput | boolean
+    allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blogs?: BlogUpdateManyWithoutUserNestedInput
+    news?: NewsUpdateManyWithoutUserNestedInput
+    imageFolders?: ImageFolderUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVideoFoldersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    company_name?: StringFieldUpdateOperationsInput | string
+    website?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    logo?: StringFieldUpdateOperationsInput | string
+    primary_color?: StringFieldUpdateOperationsInput | string
+    secondary_color?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contact_number?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    allowBlogs?: BoolFieldUpdateOperationsInput | boolean
+    allowNews?: BoolFieldUpdateOperationsInput | boolean
+    allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blogs?: BlogUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutUserNestedInput
+    imageFolders?: ImageFolderUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type VideoUpsertWithWhereUniqueWithoutFolderInput = {
+    where: VideoWhereUniqueInput
+    update: XOR<VideoUpdateWithoutFolderInput, VideoUncheckedUpdateWithoutFolderInput>
+    create: XOR<VideoCreateWithoutFolderInput, VideoUncheckedCreateWithoutFolderInput>
+  }
+
+  export type VideoUpdateWithWhereUniqueWithoutFolderInput = {
+    where: VideoWhereUniqueInput
+    data: XOR<VideoUpdateWithoutFolderInput, VideoUncheckedUpdateWithoutFolderInput>
+  }
+
+  export type VideoUpdateManyWithWhereWithoutFolderInput = {
+    where: VideoScalarWhereInput
+    data: XOR<VideoUpdateManyMutationInput, VideoUncheckedUpdateManyWithoutFolderInput>
+  }
+
+  export type VideoScalarWhereInput = {
+    AND?: VideoScalarWhereInput | VideoScalarWhereInput[]
+    OR?: VideoScalarWhereInput[]
+    NOT?: VideoScalarWhereInput | VideoScalarWhereInput[]
+    id?: StringFilter<"Video"> | string
+    title?: StringFilter<"Video"> | string
+    language?: StringNullableFilter<"Video"> | string | null
+    location?: StringNullableFilter<"Video"> | string | null
+    url?: StringFilter<"Video"> | string
+    createdAt?: DateTimeFilter<"Video"> | Date | string
+    folderId?: StringFilter<"Video"> | string
+  }
+
+  export type VideoFolderCreateWithoutVideosInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutVideoFoldersInput
+  }
+
+  export type VideoFolderUncheckedCreateWithoutVideosInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    userId: string
+  }
+
+  export type VideoFolderCreateOrConnectWithoutVideosInput = {
+    where: VideoFolderWhereUniqueInput
+    create: XOR<VideoFolderCreateWithoutVideosInput, VideoFolderUncheckedCreateWithoutVideosInput>
+  }
+
+  export type VideoFolderUpsertWithoutVideosInput = {
+    update: XOR<VideoFolderUpdateWithoutVideosInput, VideoFolderUncheckedUpdateWithoutVideosInput>
+    create: XOR<VideoFolderCreateWithoutVideosInput, VideoFolderUncheckedCreateWithoutVideosInput>
+    where?: VideoFolderWhereInput
+  }
+
+  export type VideoFolderUpdateToOneWithWhereWithoutVideosInput = {
+    where?: VideoFolderWhereInput
+    data: XOR<VideoFolderUpdateWithoutVideosInput, VideoFolderUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type VideoFolderUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutVideoFoldersNestedInput
+  }
+
+  export type VideoFolderUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewsCreateWithoutContentsInput = {
@@ -12637,6 +15831,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -12646,6 +15841,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     blogs?: BlogCreateNestedManyWithoutUserInput
     news?: NewsCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutImageFoldersInput = {
@@ -12664,6 +15860,7 @@ export namespace Prisma {
     allowBlogs?: boolean
     allowNews?: boolean
     allowImages?: boolean
+    allowVideos?: boolean
     startDate?: Date | string
     endDate: Date | string
     isActive?: boolean
@@ -12673,6 +15870,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     blogs?: BlogUncheckedCreateNestedManyWithoutUserInput
     news?: NewsUncheckedCreateNestedManyWithoutUserInput
+    VideoFolders?: VideoFolderUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutImageFoldersInput = {
@@ -12731,6 +15929,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -12740,6 +15939,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogs?: BlogUpdateManyWithoutUserNestedInput
     news?: NewsUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutImageFoldersInput = {
@@ -12758,6 +15958,7 @@ export namespace Prisma {
     allowBlogs?: BoolFieldUpdateOperationsInput | boolean
     allowNews?: BoolFieldUpdateOperationsInput | boolean
     allowImages?: BoolFieldUpdateOperationsInput | boolean
+    allowVideos?: BoolFieldUpdateOperationsInput | boolean
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -12767,6 +15968,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogs?: BlogUncheckedUpdateManyWithoutUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutUserNestedInput
+    VideoFolders?: VideoFolderUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ImageUpsertWithWhereUniqueWithoutFolderInput = {
@@ -12864,6 +16066,12 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type VideoFolderCreateManyUserInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+  }
+
   export type BlogUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -12942,6 +16150,26 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type VideoFolderUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: VideoUpdateManyWithoutFolderNestedInput
+  }
+
+  export type VideoFolderUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: VideoUncheckedUpdateManyWithoutFolderNestedInput
+  }
+
+  export type VideoFolderUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type BlogContentBlockCreateManyBlogInput = {
     id?: string
     type: string
@@ -13003,6 +16231,42 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoCreateManyFolderInput = {
+    id?: string
+    title: string
+    language?: string | null
+    location?: string | null
+    url: string
+    createdAt?: Date | string
+  }
+
+  export type VideoUpdateWithoutFolderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoUncheckedUpdateWithoutFolderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoUncheckedUpdateManyWithoutFolderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

@@ -1,8 +1,7 @@
 import prisma from "../config/prismaClient.js";
 
-
-// CREATE BLOG 
-export const createBlog = async (req, res) => {
+// CREATE NEWS
+export const createNews = async (req, res) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
@@ -18,12 +17,16 @@ export const createBlog = async (req, res) => {
 
     if (!user.allowBlogs) {
       return res.status(403).json({
-        message: "You are not allowed to create new blogs",
+        message: "You are not allowed to create news",
       });
     }
 
     const { slug, title, keywords, description, contents } = req.body;
-    
+
+    // if (!contents || contents.length === 0) {
+    //   return res.status(400).json({ message: "Content is required" });
+    // }
+
     // Parse contents (because form-data)
     let parsedContents = JSON.parse(contents);
 
@@ -43,11 +46,7 @@ export const createBlog = async (req, res) => {
       return block;
     });
 
-    // if (!contents || contents.length === 0) {
-    //   return res.status(400).json({ message: "Content is required" });
-    // }
-
-    //Validate only 1 image
+    // Validate only 1 image
     const imageBlocks = parsedContents.filter(c => c.type === "image");
     if (imageBlocks.length > 1) {
       return res.status(400).json({
@@ -55,7 +54,7 @@ export const createBlog = async (req, res) => {
       });
     }
 
-    const blog = await prisma.blog.create({
+    const news = await prisma.news.create({
       data: {
         userId: user.id,
         slug,
@@ -77,19 +76,18 @@ export const createBlog = async (req, res) => {
       },
     });
 
-    res.status(201).json({ blog });
+    res.status(201).json({ news });
 
   } catch (err) {
-    console.error("CREATE BLOG ERROR:", err);
+    console.error("CREATE NEWS ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
-
-// GET ALL BLOGS
-export const getBlogs = async (req, res) => {
+//GET NEWS
+export const getNews = async (req, res) => {
   try {
-    const blogs = await prisma.blog.findMany({
+    const news = await prisma.news.findMany({
       orderBy: { createdAt: "desc" },
       select: {
         id: true,
@@ -104,39 +102,25 @@ export const getBlogs = async (req, res) => {
             name: true,
           },
         },
-        // contents: {
-        //   where: { type: "image" }, // only thumbnail
-        //   take: 1,
-        //   select: {
-        //     content: true,
-        //   },
-        // },
         contents: {
           orderBy: { order: "asc" },
         },
       },
     });
 
-    res.json(blogs);
+    res.json(news);
 
   } catch (err) {
-    console.error("GET BLOGS ERROR:", err);
-    res.status(500).json({ error: "Failed to fetch blogs" });
+    console.error("GET NEWS ERROR:", err);
+    res.status(500).json({ error: "Failed to fetch news" });
   }
 };
 
-
-
-
-
-
-
-// DELETE BLOG
-export const deleteBlog = async (req, res) => {
+//DELETE NEWS
+export const deleteNews = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // 🔹 Fetch fresh user
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
     });
@@ -149,46 +133,41 @@ export const deleteBlog = async (req, res) => {
       return res.status(403).json({ message: "Account is blocked" });
     }
 
-    const blog = await prisma.blog.findUnique({
+    const news = await prisma.news.findUnique({
       where: { id },
     });
 
-    if (!blog) {
-      return res.status(404).json({ message: "Blog not found" });
+    if (!news) {
+      return res.status(404).json({ message: "News not found" });
     }
 
-    //Permission Check
+    // Permission
     if (user.role !== "SUPERADMIN") {
-      if (blog.userId !== user.id) {
+      if (news.userId !== user.id) {
         return res.status(403).json({
-          message: "Not allowed to delete this blog",
+          message: "Not allowed to delete this news",
         });
       }
     }
 
-    //Delete Blog (content blocks auto delete)
-    await prisma.blog.delete({
+    await prisma.news.delete({
       where: { id },
     });
 
-    res.json({ message: "Blog deleted successfully" });
+    res.json({ message: "News deleted successfully" });
 
   } catch (err) {
-    console.error("DELETE BLOG ERROR:", err);
+    console.error("DELETE NEWS ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
-
-
-
-// UPDATE BLOG
-export const updateBlog = async (req, res) => {
+//UPDATE NEWS
+export const updateNews = async (req, res) => {
   try {
     const { id } = req.params;
     const { slug, title, keywords, description, contents } = req.body;
 
-    // 🔹 Fetch fresh user
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
     });
@@ -201,29 +180,26 @@ export const updateBlog = async (req, res) => {
       return res.status(403).json({ message: "Account is blocked" });
     }
 
-    const blog = await prisma.blog.findUnique({
+    const news = await prisma.news.findUnique({
       where: { id },
       include: { contents: true },
     });
 
-    if (!blog) {
-      return res.status(404).json({ message: "Blog not found" });
+    if (!news) {
+      return res.status(404).json({ message: "News not found" });
     }
 
-    // Permission Rules
     if (user.role !== "SUPERADMIN") {
 
-      //Cannot update if allowBlogs = false
       if (!user.allowBlogs) {
         return res.status(403).json({
-          message: "You are not allowed to update blogs",
+          message: "You are not allowed to update news",
         });
       }
 
-      // Must be owner
-      if (blog.userId !== user.id) {
+      if (news.userId !== user.id) {
         return res.status(403).json({
-          message: "Not allowed to update this blog",
+          message: "Not allowed to update this news",
         });
       }
     }
@@ -272,8 +248,7 @@ export const updateBlog = async (req, res) => {
 
     await prisma.$transaction(async (tx) => {
 
-      // Update blog fields
-      await tx.blog.update({
+      await tx.news.update({
         where: { id },
         data: {
           slug,
@@ -289,18 +264,16 @@ export const updateBlog = async (req, res) => {
         .filter(c => c.id)
         .map(c => c.id);
 
-      //Delete removed blocks
-      await tx.blogContentBlock.deleteMany({
+      await tx.newsContentBlock.deleteMany({
         where: {
-          blogId: id,
+          newsId: id,
           id: { notIn: incomingIds.length ? incomingIds : [""] },
         },
       });
 
-      // Update or Create blocks
       for (const block of parsedContents) {
         if (block.id) {
-          await tx.blogContentBlock.update({
+          await tx.newsContentBlock.update({
             where: { id: block.id },
             data: {
               type: block.type,
@@ -309,9 +282,9 @@ export const updateBlog = async (req, res) => {
             },
           });
         } else {
-          await tx.blogContentBlock.create({
+          await tx.newsContentBlock.create({
             data: {
-              blogId: id,
+              newsId: id,
               type: block.type,
               content: block.content,
               order: block.order,
@@ -321,7 +294,7 @@ export const updateBlog = async (req, res) => {
       }
     });
 
-    const updatedBlog = await prisma.blog.findUnique({
+    const updatedNews = await prisma.news.findUnique({
       where: { id },
       include: {
         contents: {
@@ -330,11 +303,10 @@ export const updateBlog = async (req, res) => {
       },
     });
 
-    res.json({ blog: updatedBlog });
-
-  }
-  }catch(err) {
-    console.error("UPDATE BLOG ERROR:", err);
+    res.json({ news: updatedNews });
+  } 
+  } catch (err) {
+    console.error("UPDATE NEWS ERROR:", err);
     res.status(500).json({ error: err.message });
-  };
+  }
 };
