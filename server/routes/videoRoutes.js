@@ -22,8 +22,8 @@ router.put("/:id",requireAuth,updateVideoFolder);
 router.delete("/:id",requireAuth,deleteVideoFolder);
 
 //VIDEO ROUTES
-router.get("/:folderId/videos",requireAuth,getVideos)
-router.post("/:folderId/videos",requireAuth,createVideo)
+router.get("/:folderId/",requireAuth,getVideos)
+router.post("/:folderId/",requireAuth,createVideo)
 router.put("/videos/:id",requireAuth,updateVideo)
 router.delete("/videos/:id",requireAuth,deleteVideo)
 

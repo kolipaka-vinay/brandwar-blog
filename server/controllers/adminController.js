@@ -21,6 +21,7 @@ export const createAdmin = async (req, res) => {
       allowBlogs,
       allowNews,
       allowImages,
+      allowVideos,
       endDate
     } = req.body;
 
@@ -52,6 +53,7 @@ export const createAdmin = async (req, res) => {
         allowBlogs,
         allowNews,
         allowImages,
+        allowVideos,
         endDate: new Date(endDate),
         isActive: true,
       },
@@ -86,6 +88,7 @@ export const updateAdmin = async (req, res) => {
       allowBlogs,
       allowNews,
       allowImages,
+      allowVideos,
       isActive,
       startDate,
       endDate,
@@ -105,6 +108,7 @@ export const updateAdmin = async (req, res) => {
     if (allowBlogs !== undefined) data.allowBlogs = allowBlogs;
     if (allowNews !== undefined) data.allowNews = allowNews;
     if (allowImages !== undefined) data.allowImages = allowImages;
+    if (allowVideos !== undefined) data.allowVideos = allowVideos;
     if (isActive !== undefined) data.isActive = isActive;
     if (startDate !== undefined) data.startDate = new Date(startDate);
     if (endDate !== undefined) data.endDate = new Date(endDate);
@@ -151,9 +155,11 @@ export const getAdmins = async (req, res) => {
         website: true,
         primary_color: true,
         secondary_color: true,
+        logo:true,
         allowBlogs: true,
         allowNews: true,
         allowImages: true,
+        allowVideos:true,
         startDate: true,
         endDate: true,
         isActive: true,
@@ -235,9 +241,11 @@ export const getAdminById = async (req, res) => {
         website: true,
         primary_color: true,
         secondary_color: true,
+        logo:true,
         allowBlogs: true,
         allowNews: true,
         allowImages: true,
+        allowVideos:true,
         startDate: true,
         endDate: true,
         isActive: true,
@@ -304,7 +312,7 @@ export const restoreAdmin = async (req, res) => {
       return res.status(404).json({ message: "User not found or not deleted" });
     }
 
-    const gracePeriodDays = 7;
+    const gracePeriodDays = 200;
     const now = new Date();
     const diffDays =
       (now - new Date(user.deletedAt)) / (1000 * 60 * 60 * 24);

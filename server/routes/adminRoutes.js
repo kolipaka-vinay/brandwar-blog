@@ -6,6 +6,7 @@ import {
   deleteAdmin,
   getAdminById,
   getAdmins,
+  restoreAdmin,
   updateAdmin,
 } from "../controllers/adminController.js";
 
@@ -14,6 +15,7 @@ const router = express.Router();
 // Only SuperAdmin can manage admins
 router.post("/", requireAuth, requireSuperAdmin, createAdmin);
 router.put("/:id/update", requireAuth, requireSuperAdmin, updateAdmin);
+router.put("/:id/restoreAdmin", requireAuth, requireSuperAdmin,restoreAdmin);
 router.get("/", requireAuth, requireSuperAdmin, getAdmins);
 router.get("/:id",requireAuth,requireSuperAdmin,getAdminById);
 // router.get("/", requireAuth, requireSuperAdmin, getInactiveAdmins);

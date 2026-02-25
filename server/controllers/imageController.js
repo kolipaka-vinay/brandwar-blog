@@ -3,10 +3,9 @@ import prisma from "../config/prismaClient.js";
 //CREATE IMAGE-FOLDER
 export const createImageFolder = async (req, res) => {
   try {
-    const { adminId } = req.params; // optional (only for superadmin use)
+    const { adminId } = req.params;
     const { title } = req.body;
 
-    // 1️⃣ Get logged-in user
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
     });
@@ -19,18 +18,23 @@ export const createImageFolder = async (req, res) => {
       return res.status(403).json({ message: "Account is blocked" });
     }
 
+    //NEW VALIDATION
+    if (!user.allowBlogs && user.role !== "SUPERADMIN") {
+      return res.status(403).json({
+        message: "You are not allowed to create blog image folders",
+      });
+    }
+
     if (!title || title.trim() === "") {
       return res.status(400).json({ message: "Folder title required" });
     }
 
     let targetUserId;
 
-    // 2️⃣ Permission Logic
+    // Permission Logic
     if (user.role === "SUPERADMIN" && adminId) {
-      // SuperAdmin creating folder for admin
       targetUserId = adminId;
     } else {
-      // Normal user → can create only for themselves
       targetUserId = user.id;
     }
 
@@ -49,6 +53,54 @@ export const createImageFolder = async (req, res) => {
   }
 };
 
+// export const createImageFolder = async (req, res) => {
+//   try {
+//     const { adminId } = req.params; // optional (only for superadmin use)
+//     const { title } = req.body;
+
+//     //Get logged-in user
+//     const user = await prisma.user.findUnique({
+//       where: { id: req.user.id },
+//     });
+
+//     if (!user) {
+//       return res.status(401).json({ message: "User not found" });
+//     }
+
+//     if (!user.isActive) {
+//       return res.status(403).json({ message: "Account is blocked" });
+//     }
+
+//     if (!title || title.trim() === "") {
+//       return res.status(400).json({ message: "Folder title required" });
+//     }
+
+//     let targetUserId;
+
+//     //permission Logic
+//     if (user.role === "SUPERADMIN" && adminId) {
+//       // SuperAdmin creating folder for admin
+//       targetUserId = adminId;
+//     } else {
+//       // Normal user → can create only for themselves
+//       targetUserId = user.id;
+//     }
+
+//     const folder = await prisma.imageFolder.create({
+//       data: {
+//         title: title.trim(),
+//         userId: targetUserId,
+//       },
+//     });
+
+//     res.status(201).json(folder);
+
+//   } catch (error) {
+//     console.error("CREATE FOLDER ERROR:", error);
+//     res.status(500).json({ error: "Failed to create folder" });
+//   }
+// };
+
 
 //UPDATE IMAGE-FOLDER
 export const updateImageFolder = async (req, res) => {
@@ -56,7 +108,7 @@ export const updateImageFolder = async (req, res) => {
     const { id, adminId } = req.params; // folder id + optional adminId
     const { title } = req.body;
 
-    // 1️⃣ Get logged-in user
+    //Get logged-in user
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
     });
@@ -69,7 +121,7 @@ export const updateImageFolder = async (req, res) => {
       return res.status(403).json({ message: "Account blocked" });
     }
 
-    // 2️⃣ Find folder
+    //Find folder
     const folder = await prisma.imageFolder.findUnique({
       where: { id },
     });
@@ -78,7 +130,7 @@ export const updateImageFolder = async (req, res) => {
       return res.status(404).json({ message: "Folder not found" });
     }
 
-    // 3️⃣ Permission logic
+    //Permission logic
     if (user.role !== "SUPERADMIN") {
       // Normal admin → must own the folder
       if (folder.userId !== user.id) {
@@ -88,12 +140,12 @@ export const updateImageFolder = async (req, res) => {
       }
     }
 
-    // 4️⃣ Validate title
+    //Validate title
     if (!title || title.trim() === "") {
       return res.status(400).json({ message: "Folder title required" });
     }
 
-    // 5️⃣ Update folder
+    // Update folder
     const updatedFolder = await prisma.imageFolder.update({
       where: { id },
       data: {
@@ -263,7 +315,6 @@ export const getImages = async (req, res) => {
 export const uploadImage = async (req, res) => {
   try {
     const { folderId } = req.params;
-    // const { url, size } = req.body;/
     const file = req.file;
 
     const user = await prisma.user.findUnique({
@@ -276,6 +327,20 @@ export const uploadImage = async (req, res) => {
     if (!user.isActive)
       return res.status(403).json({ message: "Account blocked" });
 
+    // ✅ NEW: allowImages validation
+    if (!user.allowImages && user.role !== "SUPERADMIN") {
+      return res.status(403).json({
+        message: "You are not allowed to upload images",
+      });
+    }
+
+    // ✅ Validate file exists
+    if (!file) {
+      return res.status(400).json({
+        message: "Image file is required",
+      });
+    }
+
     const folder = await prisma.imageFolder.findUnique({
       where: { id: folderId },
     });
@@ -283,7 +348,7 @@ export const uploadImage = async (req, res) => {
     if (!folder)
       return res.status(404).json({ message: "Folder not found" });
 
-    // Permission
+    // Permission check
     if (user.role !== "SUPERADMIN") {
       if (folder.userId !== user.id) {
         return res.status(403).json({
@@ -291,9 +356,6 @@ export const uploadImage = async (req, res) => {
         });
       }
     }
-
-    // if (!url)
-    //   return res.status(400).json({ message: "Image URL required" });
 
     const image = await prisma.image.create({
       data: {
@@ -310,6 +372,56 @@ export const uploadImage = async (req, res) => {
     res.status(500).json({ error: "Failed to create image" });
   }
 };
+// export const uploadImage = async (req, res) => {
+//   try {
+//     const { folderId } = req.params;
+//     // const { url, size } = req.body;/
+//     const file = req.file;
+
+//     const user = await prisma.user.findUnique({
+//       where: { id: req.user.id },
+//     });
+
+//     if (!user)
+//       return res.status(401).json({ message: "User not found" });
+
+//     if (!user.isActive)
+//       return res.status(403).json({ message: "Account blocked" });
+
+//     const folder = await prisma.imageFolder.findUnique({
+//       where: { id: folderId },
+//     });
+
+//     if (!folder)
+//       return res.status(404).json({ message: "Folder not found" });
+
+//     // Permission
+//     if (user.role !== "SUPERADMIN") {
+//       if (folder.userId !== user.id) {
+//         return res.status(403).json({
+//           message: "Not allowed to add image to this folder",
+//         });
+//       }
+//     }
+
+//     // if (!url)
+//     //   return res.status(400).json({ message: "Image URL required" });
+
+//     const image = await prisma.image.create({
+//       data: {
+//         folderId,
+//         url: `/uploads/${file.filename}`,
+//         size: file.size,
+//       },
+//     });
+
+//     res.status(201).json(image);
+
+//   } catch (error) {
+//     console.error("CREATE IMAGE ERROR:", error);
+//     res.status(500).json({ error: "Failed to create image" });
+//   }
+// };
 
 //DELETE IMAGE 
 export const deleteImage = async (req, res) => {

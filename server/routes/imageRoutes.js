@@ -25,8 +25,8 @@ router.put("/:id", requireAuth, updateImageFolder);
 router.delete("/:id", requireAuth, deleteImageFolder);
 
 // IMAGE ROUTES
-router.get("/:folderId/images", requireAuth, getImages);
-router.post("/:folderId/images", requireAuth, upload.single("image"),uploadImage);
+router.get("/:folderId/", requireAuth, getImages);
+router.post("/:folderId/", requireAuth, upload.single("image"),uploadImage);
 router.delete("/images/:id", requireAuth, deleteImage);
 
 export default router;
