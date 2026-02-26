@@ -3,7 +3,8 @@ import prisma from "../config/prismaClient.js"
 // GET VIDEO FOLDER
 export const getVideoFolders = async (req, res) => {
   try {
-    const { adminId } = req.params;
+    const { adminId } = req.query;
+    // console.log("ADMIN ID:", adminId);
 
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
@@ -41,7 +42,8 @@ export const getVideoFolders = async (req, res) => {
 // CREATE VIDEO FOLDER
 export const createVideoFolder = async (req, res) => {
   try {
-    const { adminId } = req.params;
+    const { adminId } = req.body;
+    // console.log("ADMIN IDdddddddddddddd:", adminId);
     const { title } = req.body;
 
     const user = await prisma.user.findUnique({

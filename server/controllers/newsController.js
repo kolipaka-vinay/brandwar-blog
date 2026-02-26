@@ -240,7 +240,7 @@ export const getNews = async (req, res) => {
         orderBy: { createdAt: "desc" },
         select: newsSelectConfig(),
       });
-    } 
+    }
     else if (user.role === "ADMIN") {
       // Admin sees only his news
       news = await prisma.news.findMany({
@@ -248,7 +248,7 @@ export const getNews = async (req, res) => {
         orderBy: { createdAt: "desc" },
         select: newsSelectConfig(),
       });
-    } 
+    }
     else {
       return res.status(403).json({ message: "Access denied" });
     }
@@ -388,7 +388,11 @@ export const updateNews = async (req, res) => {
     let newImageUrl = null;
     if (req.files && req.files.length > 0) {
       const imageFile = req.files[0];
-      newImageUrl = `${req.protocol}://${req.get("host")}/${imageFile.path.replace(/\\/g, "/")}`;
+      const filePath = imageFile.path
+        .split("uploads")[1]
+        .replace(/\\/g, "/");
+
+      newImageUrl = `${req.protocol}://${req.get("host")}/uploads${filePath}`;
 
       // Delete old image if exists
       const oldImageBlock = news.contents.find(b => b.type === "image");
@@ -413,117 +417,117 @@ export const updateNews = async (req, res) => {
         return block;
       });
 
-    // Validate only 1 image
-    if (contents) {
-      const imageBlocks = parsedContents.filter(c => c.type === "image");
-      if (imageBlocks.length > 1) {
-        return res.status(400).json({
-          message: "Only one image section allowed",
+      // Validate only 1 image
+      if (contents) {
+        const imageBlocks = parsedContents.filter(c => c.type === "image");
+        if (imageBlocks.length > 1) {
+          return res.status(400).json({
+            message: "Only one image section allowed",
+          });
+        }
+      }
+
+      await prisma.$transaction(async (tx) => {
+
+        await tx.news.update({
+          where: { id },
+          data: {
+            slug,
+            title,
+            keywords,
+            description,
+          },
         });
-      }
-    }
 
-    await prisma.$transaction(async (tx) => {
+        if (!parsedContents) return;
 
-      await tx.news.update({
+        const incomingIds = parsedContents
+          .filter(c => c.id)
+          .map(c => c.id);
+
+        await tx.newsContentBlock.deleteMany({
+          where: {
+            newsId: id,
+            id: { notIn: incomingIds.length ? incomingIds : [""] },
+          },
+        });
+
+
+        for (let index = 0; index < parsedContents.length; index++) {
+          const block = parsedContents[index];
+
+          // 🔹 Find existing DB block (if updating)
+          const existingBlock = news.contents.find(b => b.id === block.id);
+
+          let finalOrder;
+
+          if (typeof block.order === "number") {
+            // 1️⃣ Frontend provided new order
+            finalOrder = block.order;
+          } else if (existingBlock) {
+            // 2️⃣ No new order → keep DB order
+            finalOrder = existingBlock.order;
+          } else {
+            // 3️⃣ New block without order → fallback like create
+            finalOrder = index + 1;
+          }
+
+          if (block.id) {
+            await tx.newsContentBlock.update({
+              where: { id: block.id },
+              data: {
+                type: block.type,
+                content: block.content,
+                order: finalOrder,
+              },
+            });
+          } else {
+            await tx.newsContentBlock.create({
+              data: {
+                newsId: id,
+                type: block.type,
+                content: block.content,
+                order: finalOrder,
+              },
+            });
+          }
+        }
+
+
+        // for (const block of parsedContents) {
+        //   if (block.id) {
+        //     await tx.newsContentBlock.update({
+        //       where: { id: block.id },
+        //       data: {
+        //         type: block.type,
+        //         content: block.content,
+        //         order: block.order,
+        //       },
+        //     });
+        //   } else {
+        //     await tx.newsContentBlock.create({
+        //       data: {
+        //         newsId: id,
+        //         type: block.type,
+        //         content: block.content,
+        //         order: block.order,
+        //       },
+        //     });
+        //   }
+        // }
+      });
+
+      const updatedNews = await prisma.news.findUnique({
         where: { id },
-        data: {
-          slug,
-          title,
-          keywords,
-          description,
+        include: {
+          contents: {
+            orderBy: { order: "asc" },
+          },
         },
       });
 
-      if (!parsedContents) return;
-
-      const incomingIds = parsedContents
-        .filter(c => c.id)
-        .map(c => c.id);
-
-      await tx.newsContentBlock.deleteMany({
-        where: {
-          newsId: id,
-          id: { notIn: incomingIds.length ? incomingIds : [""] },
-        },
-      });
-
-
-      for (let index = 0; index < parsedContents.length; index++) {
-        const block = parsedContents[index];
-
-        // 🔹 Find existing DB block (if updating)
-        const existingBlock = news.contents.find(b => b.id === block.id);
-
-        let finalOrder;
-
-        if (typeof block.order === "number") {
-          // 1️⃣ Frontend provided new order
-          finalOrder = block.order;
-        } else if (existingBlock) {
-          // 2️⃣ No new order → keep DB order
-          finalOrder = existingBlock.order;
-        } else {
-          // 3️⃣ New block without order → fallback like create
-          finalOrder = index + 1;
-        }
-
-        if (block.id) {
-          await tx.newsContentBlock.update({
-            where: { id: block.id },
-            data: {
-              type: block.type,
-              content: block.content,
-              order: finalOrder,
-            },
-          });
-        } else {
-          await tx.newsContentBlock.create({
-            data: {
-              newsId: id,
-              type: block.type,
-              content: block.content,
-              order: finalOrder,
-            },
-          });
-        }
-      }
-
-
-      // for (const block of parsedContents) {
-      //   if (block.id) {
-      //     await tx.newsContentBlock.update({
-      //       where: { id: block.id },
-      //       data: {
-      //         type: block.type,
-      //         content: block.content,
-      //         order: block.order,
-      //       },
-      //     });
-      //   } else {
-      //     await tx.newsContentBlock.create({
-      //       data: {
-      //         newsId: id,
-      //         type: block.type,
-      //         content: block.content,
-      //         order: block.order,
-      //       },
-      //     });
-      //   }
-      // }
-    });
-
-    const updatedNews = await prisma.news.findUnique({
-      where: { id },
-      include: {
-        contents: {
-          orderBy: { order: "asc" },
-        },
-      },
-    });
-
-    res.json({ news: updatedNews });
-  } 
+      res.json({ news: updatedNews });
+    }
   } catch (err) {
     console.error("UPDATE NEWS ERROR:", err);
     res.status(500).json({ error: err.message });

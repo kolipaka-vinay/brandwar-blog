@@ -3,9 +3,9 @@ import prisma from "../config/prismaClient.js";
 //CREATE IMAGE-FOLDER
 export const createImageFolder = async (req, res) => {
   try {
-    const { adminId } = req.params;
-    const { title } = req.body;
-
+    // const { adminId } = req.params;
+    const { title, adminId } = req.body;
+    // console.log("image admin id", adminId)
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
     });
@@ -165,8 +165,8 @@ export const updateImageFolder = async (req, res) => {
 //GET IMAGES-FOLDER
 export const getImageFolders = async (req, res) => {
   try {
-    const { adminId } = req.params; // optional (for superadmin view)
-
+    const { adminId } = req.query; // optional (for superadmin view)
+    // console.log("image id", adminId);
     // 1️⃣ Get logged-in user
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
