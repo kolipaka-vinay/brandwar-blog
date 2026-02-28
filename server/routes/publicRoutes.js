@@ -8,16 +8,26 @@ const prisma = new PrismaClient();
 router.get("/:website/blogs", async (req, res) => {
   const { website } = req.params;
 
-  const admin = await prisma.admin.findUnique({
-    where: { website }
+  const admin = await prisma.user.findFirst({
+    where: {
+      website: { equals: website },
+      // website: { equals: website, mode: "insensitive" },
+      role: "ADMIN"
+    }
   });
 
   if (!admin) return res.status(404).send("Admin not found");
 
   const blogs = await prisma.blog.findMany({
     where: {
-      adminId: admin.id
-    }
+      userId: admin.id
+    },
+    include: {
+      contents: {
+        orderBy: { order: "asc" }
+      }
+    },
+    orderBy: { createdAt: "desc" }
   });
 
   res.json(blogs);
@@ -29,16 +39,25 @@ router.get("/:website/blogs", async (req, res) => {
 router.get("/:website/news", async (req, res) => {
   const { website } = req.params;
 
-  const admin = await prisma.admin.findUnique({
-    where: { website : website }
+  const admin = await prisma.user.findFirst({
+    where: {
+      website: { equals: website },
+      role: "ADMIN"
+    }
   });
 
   if (!admin) return res.status(404).send("Admin not found");
 
   const news = await prisma.news.findMany({
     where: {
-      adminId: admin.id
-    }
+      userId: admin.id
+    },
+    include: {
+      contents: {
+        orderBy: { order: "asc" }
+      }
+    },
+    orderBy: { createdAt: "desc" }
   });
 
   res.json(news);
@@ -50,8 +69,11 @@ router.get("/:website/videos", async (req, res) => {
     const { website } = req.params;
 
     // 1️⃣ Find admin by website
-    const admin = await prisma.admin.findUnique({
-      where: { website: website }
+    const admin = await prisma.user.findFirst({
+      where: {
+        website: { equals: website },
+        role: "ADMIN"
+      }
     });
 
     if (!admin) {
@@ -85,8 +107,11 @@ router.get("/:website/images", async (req, res) => {
     const { website } = req.params;
 
     // 1️⃣ Find admin by website
-    const admin = await prisma.admin.findUnique({
-      where: { website: website.toLowerCase() }
+    const admin = await prisma.user.findFirst({
+      where: {
+        website: { equals: website },
+        role: "ADMIN"
+      }
     });
 
     if (!admin) {

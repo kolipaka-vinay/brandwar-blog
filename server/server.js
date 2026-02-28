@@ -8,7 +8,9 @@ import blogRoutes from "./routes/blogRoutes.js";
 import newsRoutes from "./routes/newsRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js"
 import { PrismaClient } from "./generated/prisma/index.js";
-import videoRoutes from "./routes/videoRoutes.js"
+import videoRoutes from "./routes/videoRoutes.js";
+import publicRoutes from "./routes/publicRoutes.js";
+
 const app = express();
 const PORT = 4000;
 

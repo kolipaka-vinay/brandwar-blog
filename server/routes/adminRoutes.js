@@ -11,8 +11,6 @@ import {
 } from "../controllers/adminController.js";
 import { upload } from "../middleware/uploadMiddleware.js";
 
-import { upload } from "../middleware/uploadMiddleware.js";
-
 const router = express.Router();
 
 // Only SuperAdmin can manage admins
