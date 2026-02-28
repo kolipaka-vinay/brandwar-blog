@@ -14,15 +14,17 @@ const PORT = 4000;
 
 // MIDDLEWARE
 app.use(cors());
-app.use(express.json());   // instead of bodyParser
+app.use(express.json({ limit: '5mb' }));   // increased limit for image uploads
+app.use(express.urlencoded({ limit: '5mb', extended: true }));
+
 
 // ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/admins", adminRoutes);
 app.use("/api/blogs", blogRoutes);
-app.use("/api/news",newsRoutes)
-app.use("/api/imagefolders",imageRoutes)
-app.use("/api/videofolders",videoRoutes)
+app.use("/api/news", newsRoutes)
+app.use("/api/imagefolders", imageRoutes)
+app.use("/api/videofolders", videoRoutes)
 
 //PUBLIC ROUTES
 app.use("/api/public", publicRoutes);
