@@ -188,6 +188,7 @@ exports.Prisma.VideoScalarFieldEnum = {
   title: 'title',
   language: 'language',
   location: 'location',
+  project_name: 'project_name',
   url: 'url',
   createdAt: 'createdAt',
   folderId: 'folderId'

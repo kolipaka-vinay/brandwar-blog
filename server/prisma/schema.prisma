@@ -132,6 +132,7 @@ model Video {
   title       String
   language    String? 
   location    String?
+  project_name String? 
   url         String   // stored video path
   createdAt   DateTime @default(now())
 

@@ -120,12 +120,13 @@ model VideoFolder {
 
 // VIDEO CONTENT
 model Video {
-  id        String   @id @default(uuid())
-  title     String
-  language  String?
-  location  String?
-  url       String // stored video path
-  createdAt DateTime @default(now())
+  id           String   @id @default(uuid())
+  title        String
+  language     String?
+  location     String?
+  project_name String?
+  url          String // stored video path
+  createdAt    DateTime @default(now())
 
   folderId String
   folder   VideoFolder @relation(fields: [folderId], references: [id], onDelete: Cascade)

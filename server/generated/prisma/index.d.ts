@@ -7590,6 +7590,7 @@ export namespace Prisma {
     title: string | null
     language: string | null
     location: string | null
+    project_name: string | null
     url: string | null
     createdAt: Date | null
     folderId: string | null
@@ -7600,6 +7601,7 @@ export namespace Prisma {
     title: string | null
     language: string | null
     location: string | null
+    project_name: string | null
     url: string | null
     createdAt: Date | null
     folderId: string | null
@@ -7610,6 +7612,7 @@ export namespace Prisma {
     title: number
     language: number
     location: number
+    project_name: number
     url: number
     createdAt: number
     folderId: number
@@ -7622,6 +7625,7 @@ export namespace Prisma {
     title?: true
     language?: true
     location?: true
+    project_name?: true
     url?: true
     createdAt?: true
     folderId?: true
@@ -7632,6 +7636,7 @@ export namespace Prisma {
     title?: true
     language?: true
     location?: true
+    project_name?: true
     url?: true
     createdAt?: true
     folderId?: true
@@ -7642,6 +7647,7 @@ export namespace Prisma {
     title?: true
     language?: true
     location?: true
+    project_name?: true
     url?: true
     createdAt?: true
     folderId?: true
@@ -7725,6 +7731,7 @@ export namespace Prisma {
     title: string
     language: string | null
     location: string | null
+    project_name: string | null
     url: string
     createdAt: Date
     folderId: string
@@ -7752,6 +7759,7 @@ export namespace Prisma {
     title?: boolean
     language?: boolean
     location?: boolean
+    project_name?: boolean
     url?: boolean
     createdAt?: boolean
     folderId?: boolean
@@ -7763,6 +7771,7 @@ export namespace Prisma {
     title?: boolean
     language?: boolean
     location?: boolean
+    project_name?: boolean
     url?: boolean
     createdAt?: boolean
     folderId?: boolean
@@ -7774,6 +7783,7 @@ export namespace Prisma {
     title?: boolean
     language?: boolean
     location?: boolean
+    project_name?: boolean
     url?: boolean
     createdAt?: boolean
     folderId?: boolean
@@ -7785,12 +7795,13 @@ export namespace Prisma {
     title?: boolean
     language?: boolean
     location?: boolean
+    project_name?: boolean
     url?: boolean
     createdAt?: boolean
     folderId?: boolean
   }
 
-  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "language" | "location" | "url" | "createdAt" | "folderId", ExtArgs["result"]["video"]>
+  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "language" | "location" | "project_name" | "url" | "createdAt" | "folderId", ExtArgs["result"]["video"]>
   export type VideoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     folder?: boolean | VideoFolderDefaultArgs<ExtArgs>
   }
@@ -7811,6 +7822,7 @@ export namespace Prisma {
       title: string
       language: string | null
       location: string | null
+      project_name: string | null
       url: string
       createdAt: Date
       folderId: string
@@ -8242,6 +8254,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Video", 'String'>
     readonly language: FieldRef<"Video", 'String'>
     readonly location: FieldRef<"Video", 'String'>
+    readonly project_name: FieldRef<"Video", 'String'>
     readonly url: FieldRef<"Video", 'String'>
     readonly createdAt: FieldRef<"Video", 'DateTime'>
     readonly folderId: FieldRef<"Video", 'String'>
@@ -12027,6 +12040,7 @@ export namespace Prisma {
     title: 'title',
     language: 'language',
     location: 'location',
+    project_name: 'project_name',
     url: 'url',
     createdAt: 'createdAt',
     folderId: 'folderId'
@@ -12621,6 +12635,7 @@ export namespace Prisma {
     title?: StringFilter<"Video"> | string
     language?: StringNullableFilter<"Video"> | string | null
     location?: StringNullableFilter<"Video"> | string | null
+    project_name?: StringNullableFilter<"Video"> | string | null
     url?: StringFilter<"Video"> | string
     createdAt?: DateTimeFilter<"Video"> | Date | string
     folderId?: StringFilter<"Video"> | string
@@ -12632,6 +12647,7 @@ export namespace Prisma {
     title?: SortOrder
     language?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
+    project_name?: SortOrderInput | SortOrder
     url?: SortOrder
     createdAt?: SortOrder
     folderId?: SortOrder
@@ -12646,6 +12662,7 @@ export namespace Prisma {
     title?: StringFilter<"Video"> | string
     language?: StringNullableFilter<"Video"> | string | null
     location?: StringNullableFilter<"Video"> | string | null
+    project_name?: StringNullableFilter<"Video"> | string | null
     url?: StringFilter<"Video"> | string
     createdAt?: DateTimeFilter<"Video"> | Date | string
     folderId?: StringFilter<"Video"> | string
@@ -12657,6 +12674,7 @@ export namespace Prisma {
     title?: SortOrder
     language?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
+    project_name?: SortOrderInput | SortOrder
     url?: SortOrder
     createdAt?: SortOrder
     folderId?: SortOrder
@@ -12673,6 +12691,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Video"> | string
     language?: StringNullableWithAggregatesFilter<"Video"> | string | null
     location?: StringNullableWithAggregatesFilter<"Video"> | string | null
+    project_name?: StringNullableWithAggregatesFilter<"Video"> | string | null
     url?: StringWithAggregatesFilter<"Video"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Video"> | Date | string
     folderId?: StringWithAggregatesFilter<"Video"> | string
@@ -13313,6 +13332,7 @@ export namespace Prisma {
     title: string
     language?: string | null
     location?: string | null
+    project_name?: string | null
     url: string
     createdAt?: Date | string
     folder: VideoFolderCreateNestedOneWithoutVideosInput
@@ -13323,6 +13343,7 @@ export namespace Prisma {
     title: string
     language?: string | null
     location?: string | null
+    project_name?: string | null
     url: string
     createdAt?: Date | string
     folderId: string
@@ -13333,6 +13354,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     language?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    project_name?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folder?: VideoFolderUpdateOneRequiredWithoutVideosNestedInput
@@ -13343,6 +13365,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     language?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    project_name?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folderId?: StringFieldUpdateOperationsInput | string
@@ -13353,6 +13376,7 @@ export namespace Prisma {
     title: string
     language?: string | null
     location?: string | null
+    project_name?: string | null
     url: string
     createdAt?: Date | string
     folderId: string
@@ -13363,6 +13387,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     language?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    project_name?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13372,6 +13397,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     language?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    project_name?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folderId?: StringFieldUpdateOperationsInput | string
@@ -14053,6 +14079,7 @@ export namespace Prisma {
     title?: SortOrder
     language?: SortOrder
     location?: SortOrder
+    project_name?: SortOrder
     url?: SortOrder
     createdAt?: SortOrder
     folderId?: SortOrder
@@ -14063,6 +14090,7 @@ export namespace Prisma {
     title?: SortOrder
     language?: SortOrder
     location?: SortOrder
+    project_name?: SortOrder
     url?: SortOrder
     createdAt?: SortOrder
     folderId?: SortOrder
@@ -14073,6 +14101,7 @@ export namespace Prisma {
     title?: SortOrder
     language?: SortOrder
     location?: SortOrder
+    project_name?: SortOrder
     url?: SortOrder
     createdAt?: SortOrder
     folderId?: SortOrder
@@ -15594,6 +15623,7 @@ export namespace Prisma {
     title: string
     language?: string | null
     location?: string | null
+    project_name?: string | null
     url: string
     createdAt?: Date | string
   }
@@ -15603,6 +15633,7 @@ export namespace Prisma {
     title: string
     language?: string | null
     location?: string | null
+    project_name?: string | null
     url: string
     createdAt?: Date | string
   }
@@ -15710,6 +15741,7 @@ export namespace Prisma {
     title?: StringFilter<"Video"> | string
     language?: StringNullableFilter<"Video"> | string | null
     location?: StringNullableFilter<"Video"> | string | null
+    project_name?: StringNullableFilter<"Video"> | string | null
     url?: StringFilter<"Video"> | string
     createdAt?: DateTimeFilter<"Video"> | Date | string
     folderId?: StringFilter<"Video"> | string
@@ -16239,6 +16271,7 @@ export namespace Prisma {
     title: string
     language?: string | null
     location?: string | null
+    project_name?: string | null
     url: string
     createdAt?: Date | string
   }
@@ -16248,6 +16281,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     language?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    project_name?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16257,6 +16291,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     language?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    project_name?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16266,6 +16301,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     language?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    project_name?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

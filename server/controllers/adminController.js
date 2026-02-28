@@ -5,12 +5,75 @@ const prisma = new PrismaClient();
 const SALT_ROUNDS = 10;
 
 // Create Admin
+// export const createAdmin = async (req, res) => {
+//   try {
+//     const {
+//       company_name,
+//       website,
+//       logo,
+//       primary_color,
+//       secondary_color,
+//       name,
+//       contact_number,
+//       address,
+//       email,
+//       password,
+//       allowBlogs,
+//       allowNews,
+//       allowImages,
+//       allowVideos,
+//       endDate
+//     } = req.body;
+
+//     // Check existing email
+//     const existing = await prisma.user.findUnique({
+//       where: { email },
+//     });
+
+//     if (existing) {
+//       return res.status(400).json({ message: "Email already exists" });
+//     }
+
+//     // Hash password
+//     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+//     const admin = await prisma.user.create({
+//       data: {
+//         company_name,
+//         website,
+//         logo,
+//         primary_color,
+//         secondary_color,
+//         name,
+//         contact_number,
+//         address,
+//         email,
+//         password: hashedPassword,
+//         role: "ADMIN",
+//         allowBlogs,
+//         allowNews,
+//         allowImages,
+//         allowVideos,
+//         endDate: new Date(endDate),
+//         isActive: true,
+//       },
+//     });
+
+//     res.status(201).json({
+//       message: "Admin created successfully",
+//       admin,
+//     });
+
+//   } catch (err) {
+//     console.error("CREATE ADMIN ERROR:", err);
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 export const createAdmin = async (req, res) => {
   try {
     const {
       company_name,
       website,
-      logo,
       primary_color,
       secondary_color,
       name,
@@ -25,6 +88,12 @@ export const createAdmin = async (req, res) => {
       endDate
     } = req.body;
 
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ message: "Logo image is required" });
+    }
+
     // Check existing email
     const existing = await prisma.user.findUnique({
       where: { email },
@@ -34,14 +103,13 @@ export const createAdmin = async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const admin = await prisma.user.create({
       data: {
         company_name,
         website,
-        logo,
+        logo: `/uploads/${file.filename}`, // ✅ store path
         primary_color,
         secondary_color,
         name,
@@ -50,10 +118,10 @@ export const createAdmin = async (req, res) => {
         email,
         password: hashedPassword,
         role: "ADMIN",
-        allowBlogs,
-        allowNews,
-        allowImages,
-        allowVideos,
+        allowBlogs: allowBlogs === "true" || allowBlogs === true,
+        allowNews: allowNews === "true" || allowNews === true,
+        allowImages: allowImages === "true" || allowImages === true,
+        allowVideos: allowVideos === "true" || allowVideos === true,
         endDate: new Date(endDate),
         isActive: true,
       },
@@ -71,6 +139,66 @@ export const createAdmin = async (req, res) => {
 };
 
 // ADMIN UPDATE
+// export const updateAdmin = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+
+//     const {
+//       company_name,
+//       website,
+//       logo,
+//       primary_color,
+//       secondary_color,
+//       name,
+//       contact_number,
+//       email,
+//       address,
+//       allowBlogs,
+//       allowNews,
+//       allowImages,
+//       allowVideos,
+//       isActive,
+//       startDate,
+//       endDate,
+//     } = req.body;
+
+//     const data = {};
+
+//     if (company_name !== undefined) data.company_name = company_name;
+//     if (website !== undefined) data.website = website;
+//     if (logo !== undefined) data.logo = logo;
+//     if (primary_color !== undefined) data.primary_color = primary_color;
+//     if (secondary_color !== undefined) data.secondary_color = secondary_color;
+//     if (name !== undefined) data.name = name;
+//     if (contact_number !== undefined) data.contact_number = contact_number;
+//     if (email !== undefined) data.email = email;
+//     if (address !== undefined) data.address = address;
+//     if (allowBlogs !== undefined) data.allowBlogs = allowBlogs;
+//     if (allowNews !== undefined) data.allowNews = allowNews;
+//     if (allowImages !== undefined) data.allowImages = allowImages;
+//     if (allowVideos !== undefined) data.allowVideos = allowVideos;
+//     if (isActive !== undefined) data.isActive = isActive;
+//     if (startDate !== undefined) data.startDate = new Date(startDate);
+//     if (endDate !== undefined) data.endDate = new Date(endDate);
+
+//     const updated = await prisma.user.update({
+//       where: { id },
+//       data,
+//     });
+
+//     res.json({
+//       message: "Admin updated successfully",
+//       updated,
+//     });
+
+//   } catch (err) {
+//     console.error("UPDATE ADMIN ERROR:", err);
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+import fs from "fs";
+import path from "path";
+
 export const updateAdmin = async (req, res) => {
   try {
     const { id } = req.params;
@@ -78,7 +206,6 @@ export const updateAdmin = async (req, res) => {
     const {
       company_name,
       website,
-      logo,
       primary_color,
       secondary_color,
       name,
@@ -94,24 +221,46 @@ export const updateAdmin = async (req, res) => {
       endDate,
     } = req.body;
 
+    const file = req.file;
+
+    const existingAdmin = await prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!existingAdmin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
     const data = {};
 
     if (company_name !== undefined) data.company_name = company_name;
     if (website !== undefined) data.website = website;
-    if (logo !== undefined) data.logo = logo;
     if (primary_color !== undefined) data.primary_color = primary_color;
     if (secondary_color !== undefined) data.secondary_color = secondary_color;
     if (name !== undefined) data.name = name;
     if (contact_number !== undefined) data.contact_number = contact_number;
     if (email !== undefined) data.email = email;
     if (address !== undefined) data.address = address;
-    if (allowBlogs !== undefined) data.allowBlogs = allowBlogs;
-    if (allowNews !== undefined) data.allowNews = allowNews;
-    if (allowImages !== undefined) data.allowImages = allowImages;
-    if (allowVideos !== undefined) data.allowVideos = allowVideos;
-    if (isActive !== undefined) data.isActive = isActive;
+    if (allowBlogs !== undefined) data.allowBlogs = allowBlogs === "true" || allowBlogs === true;
+    if (allowNews !== undefined) data.allowNews = allowNews === "true" || allowNews === true;
+    if (allowImages !== undefined) data.allowImages = allowImages === "true" || allowImages === true;
+    if (allowVideos !== undefined) data.allowVideos = allowVideos === "true" || allowVideos === true;
+    if (isActive !== undefined) data.isActive = isActive === "true" || isActive === true;
     if (startDate !== undefined) data.startDate = new Date(startDate);
     if (endDate !== undefined) data.endDate = new Date(endDate);
+
+    // ✅ If new logo uploaded
+    if (file) {
+      // Delete old logo file
+      if (existingAdmin.logo) {
+        const oldPath = path.join(process.cwd(), existingAdmin.logo);
+        if (fs.existsSync(oldPath)) {
+          fs.unlinkSync(oldPath);
+        }
+      }
+
+      data.logo = `/uploads/${file.filename}`;
+    }
 
     const updated = await prisma.user.update({
       where: { id },
@@ -128,7 +277,6 @@ export const updateAdmin = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 
 
 // List Admins

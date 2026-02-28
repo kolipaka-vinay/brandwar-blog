@@ -24,6 +24,9 @@ app.use("/api/news",newsRoutes)
 app.use("/api/imagefolders",imageRoutes)
 app.use("/api/videofolders",videoRoutes)
 
+//PUBLIC ROUTES
+app.use("/api/public", publicRoutes);
+
 // STATIC FILES (Uploads)
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 

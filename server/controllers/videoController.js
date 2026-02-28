@@ -309,7 +309,7 @@ export const getVideos = async (req, res) => {
 export const createVideo = async (req, res) => {
   try {
     const { folderId } = req.params;
-    const { title, language, location, url } = req.body;
+    const { title, language, location, url ,project_name} = req.body;
 
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
@@ -366,6 +366,7 @@ export const createVideo = async (req, res) => {
         language,
         location,
         url: cleanedUrl,
+        project_name,
         folderId,
       },
     });
@@ -425,7 +426,7 @@ export const createVideo = async (req, res) => {
 export const updateVideo = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, language, location, url } = req.body;
+    const { title, language, location, url ,project_name} = req.body;
 
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
@@ -491,6 +492,7 @@ export const updateVideo = async (req, res) => {
         language,
         location,
         url: cleanedUrl,
+        project_name,
       },
     });
 

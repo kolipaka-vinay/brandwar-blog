@@ -9,11 +9,12 @@ import {
   restoreAdmin,
   updateAdmin,
 } from "../controllers/adminController.js";
+import { upload } from "../middleware/uploadMiddleware.js";
 
 const router = express.Router();
  
 // Only SuperAdmin can manage admins
-router.post("/", requireAuth, requireSuperAdmin, createAdmin);
+router.post("/", requireAuth, requireSuperAdmin, upload.single("logo"),createAdmin);
 router.put("/:id/update", requireAuth, requireSuperAdmin, updateAdmin);
 router.put("/:id/restoreAdmin", requireAuth, requireSuperAdmin,restoreAdmin);
 router.get("/", requireAuth, requireSuperAdmin, getAdmins);
