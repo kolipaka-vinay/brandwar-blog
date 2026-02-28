@@ -10,7 +10,6 @@ export const createAdmin = async (req, res) => {
     const {
       company_name,
       website,
-      logo,
       primary_color,
       secondary_color,
       name,
@@ -24,6 +23,14 @@ export const createAdmin = async (req, res) => {
       allowVideos,
       endDate
     } = req.body;
+
+    let logoUrl = null;
+    if (req.file) {
+      logoUrl = `/uploads/${req.file.filename}`;
+    } else if (req.body.logo) {
+      // In case they didn't provide a file but provided a string URL (unlikely for new creations)
+      logoUrl = req.body.logo;
+    }
 
     // Check existing email
     const existing = await prisma.user.findUnique({
@@ -41,7 +48,7 @@ export const createAdmin = async (req, res) => {
       data: {
         company_name,
         website,
-        logo,
+        logo: logoUrl,
         primary_color,
         secondary_color,
         name,
@@ -50,10 +57,10 @@ export const createAdmin = async (req, res) => {
         email,
         password: hashedPassword,
         role: "ADMIN",
-        allowBlogs,
-        allowNews,
-        allowImages,
-        allowVideos,
+        allowBlogs: allowBlogs === 'true' || allowBlogs === true,
+        allowNews: allowNews === 'true' || allowNews === true,
+        allowImages: allowImages === 'true' || allowImages === true,
+        allowVideos: allowVideos === 'true' || allowVideos === true,
         endDate: new Date(endDate),
         isActive: true,
       },
@@ -78,7 +85,6 @@ export const updateAdmin = async (req, res) => {
     const {
       company_name,
       website,
-      logo,
       primary_color,
       secondary_color,
       name,
@@ -96,20 +102,28 @@ export const updateAdmin = async (req, res) => {
 
     const data = {};
 
+    let logoUrl = undefined;
+    if (req.file) {
+      logoUrl = `/uploads/${req.file.filename}`;
+    } else if (req.body.logo !== undefined) {
+      // if it's sent as a string (e.g. they didn't change the image, so it sends the old URL)
+      logoUrl = req.body.logo;
+    }
+
     if (company_name !== undefined) data.company_name = company_name;
     if (website !== undefined) data.website = website;
-    if (logo !== undefined) data.logo = logo;
+    if (logoUrl !== undefined) data.logo = logoUrl;
     if (primary_color !== undefined) data.primary_color = primary_color;
     if (secondary_color !== undefined) data.secondary_color = secondary_color;
     if (name !== undefined) data.name = name;
     if (contact_number !== undefined) data.contact_number = contact_number;
     if (email !== undefined) data.email = email;
     if (address !== undefined) data.address = address;
-    if (allowBlogs !== undefined) data.allowBlogs = allowBlogs;
-    if (allowNews !== undefined) data.allowNews = allowNews;
-    if (allowImages !== undefined) data.allowImages = allowImages;
-    if (allowVideos !== undefined) data.allowVideos = allowVideos;
-    if (isActive !== undefined) data.isActive = isActive;
+    if (allowBlogs !== undefined) data.allowBlogs = allowBlogs === 'true' || allowBlogs === true;
+    if (allowNews !== undefined) data.allowNews = allowNews === 'true' || allowNews === true;
+    if (allowImages !== undefined) data.allowImages = allowImages === 'true' || allowImages === true;
+    if (allowVideos !== undefined) data.allowVideos = allowVideos === 'true' || allowVideos === true;
+    if (isActive !== undefined) data.isActive = isActive === 'true' || isActive === true;
     if (startDate !== undefined) data.startDate = new Date(startDate);
     if (endDate !== undefined) data.endDate = new Date(endDate);
 
@@ -155,11 +169,11 @@ export const getAdmins = async (req, res) => {
         website: true,
         primary_color: true,
         secondary_color: true,
-        logo:true,
+        logo: true,
         allowBlogs: true,
         allowNews: true,
         allowImages: true,
-        allowVideos:true,
+        allowVideos: true,
         startDate: true,
         endDate: true,
         isActive: true,
@@ -241,11 +255,11 @@ export const getAdminById = async (req, res) => {
         website: true,
         primary_color: true,
         secondary_color: true,
-        logo:true,
+        logo: true,
         allowBlogs: true,
         allowNews: true,
         allowImages: true,
-        allowVideos:true,
+        allowVideos: true,
         startDate: true,
         endDate: true,
         isActive: true,
